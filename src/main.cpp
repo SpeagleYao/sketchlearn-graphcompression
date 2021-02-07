@@ -64,13 +64,20 @@ int main(int argc, char* argv[]) {
   // vector<int> freqs = vector<int> (stoi(args["m"]), 0);
   // generate random flowkeys
   srand(current_time_nanoseconds());
-  for (int i=0; i<10000; i++) {
+  for (int i=0; i<1000; i++) {
     int key = rand()%(RAND_MAX/2);
     // cout << key << endl;
     // int hashed = khfs.getHashedValue(key, 0);
     // cout << key << ' ' << hashed << endl;
     //freqs[hashed]++;
     mls.feedFlowKey(key);
+  }
+  for (int i=0; i<5; i++) {
+    int largeFlow = rand()%(RAND_MAX/2);
+    cout << "random large flow is " << largeFlow << endl;
+    for (int j=0; j<500*(i+1); j++) {
+      mls.feedFlowKey(largeFlow);
+    }
   }
   // for (auto it=freqs.begin(); it!=freqs.end(); it++) {
   //   cout << *it << ' ';
@@ -85,12 +92,28 @@ int main(int argc, char* argv[]) {
   }
   cout << endl;
 
-  cout << "Print estimated mean and variance for each level" << endl;
-  vector<vector<double>> distributions = mls.computeDistribution();
+  // cout << "Print estimated mean and variance for each level" << endl;
+  vector<vector<double>> distributions = mls.computeDistribution_v2();
   for (int k=0; k<distributions.size(); k++) {
     cout << distributions[k][0] << ' ' << distributions[k][1] << endl;
   }
 
+  cout << endl << "extract large flow" << endl;
+
+  unordered_map<int, int> lfm;
+  unordered_map<int, vector<double>> blp;
+  // for (int r=0; r<stoi(args["k"]); r++) {
+  //   for (int c=0; c<stoi(args["m"]); c++) {
+  //     mls.extractLargeFlows(0.5, r, c, distributions, lfm, blp);
+  //   }
+  // }
+
+  mls.modelInference(0.5, lfm, blp);
+  cout << endl << "extracted flows: " << endl; 
+  for (auto it=lfm.begin(); it!=lfm.end(); it++) {
+    cout << it->first << ' ' << it->second << endl;
+  }
+  
   cout << endl;
 
 }
