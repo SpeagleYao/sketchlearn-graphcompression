@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
   // vector<int> freqs = vector<int> (stoi(args["m"]), 0);
   // generate random flowkeys
   srand(current_time_nanoseconds());
-  for (int i=0; i<1000; i++) {
+  for (int i=0; i<10000; i++) {
     int key = rand()%(RAND_MAX/2);
     // cout << key << endl;
     // int hashed = khfs.getHashedValue(key, 0);
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
   for (int i=0; i<5; i++) {
     int largeFlow = rand()%(RAND_MAX/2);
     cout << "random large flow is " << largeFlow << endl;
-    for (int j=0; j<500*(i+1); j++) {
+    for (int j=0; j<1000*(i+1); j++) {
       mls.feedFlowKey(largeFlow);
     }
   }

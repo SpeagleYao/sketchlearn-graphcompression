@@ -401,6 +401,9 @@ bool MultiLevelSketch::terminate(int denominator, vector<vector<double>>& distri
   if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
     return true;
   }
+  // if (r1>0.6&&r2>0.92&&r3>0.95) {
+  //   return true;
+  // }
   return false;
 }
 
