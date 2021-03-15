@@ -15,6 +15,7 @@
 #include <float.h>
 #include <assert.h>
 #include <random>
+#include <vector>
 
 using namespace std;
 
@@ -23,6 +24,8 @@ int current_time_nanoseconds();
 int moduloMultiplication(long long a, long long b, long long m);
 
 int moduloAddition(long long a, long long b, long long m);
+
+int moduloHexString(string& s, long long m);
 
 class KHashFunctions {
 
@@ -33,7 +36,14 @@ public:
   ~KHashFunctions();
 
   int getHashedValue(int key, int r);
+  int getHashedValue(int key, int r, int shift);
   vector<int> getHashedValues(int key);
+  vector<int> getHashedValues(int key, int shift);
+
+  int getHashedValue(string& key, int r);
+  int getHashedValue(string& key, int r, int shift);
+  vector<int> getHashedValues(string& key);
+  vector<int> getHashedValues(string& key, int shift);
 
 private:
   int k;
