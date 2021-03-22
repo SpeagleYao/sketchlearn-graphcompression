@@ -15,9 +15,10 @@
 using namespace std;
 
 
-void readFromFile(string& filepath, unordered_map<string, int>& freqs) {
+int readFromFile(string& filepath, unordered_map<string, int>& freqs) {
   ifstream fp(filepath);
   string line;
+  int count = 0;
 
   while (getline(fp, line)) {
     if (!line.empty()) {
@@ -25,12 +26,14 @@ void readFromFile(string& filepath, unordered_map<string, int>& freqs) {
       boost::split(splits, line, boost::is_any_of(" "));
       if (freqs.find(splits[0])==freqs.end()) {
         freqs[splits[0]] = stoi(splits[1]);
+        count++;
       }
       else {
         cout << "duplicate edges!" << endl;
       }
     }
   }
+  return count;
 }
 
 
@@ -92,24 +95,30 @@ int main(int argc, char* argv[]) {
   if (args.find("f")!=args.end()) {
     // pre-process of the data
     unordered_map<string, int> freqs;
-    readFromFile(args["f"], freqs);
+    unordered_map<string, int> largeflows;
+    int flownumber = readFromFile(args["f"], freqs);
     int totalnumber = 0;
     for (auto it : freqs) {
       totalnumber += it.second;
     }
     int thre = totalnumber/stoi(args["m"]);
+    cout << "number of distinct flows: " << flownumber << endl;
     cout << "total frequency: " << totalnumber << endl; 
     cout << "minimum frequency to be large flow: " << thre << endl;
 
     MultiLevelSketch mls(stoi(args["k"]), stoi(args["m"]), 320, 160);
+    KHashFunctions kfs = mls.getKHashFunctions();
     for (auto it : freqs) {
       if (it.second>thre) {
-        cout << "large flow: " << it.first << ' ' << it.second << endl;
+        // cout << "large flow: " << it.first << ' ' << it.second << endl;
+        largeflows.insert(it);
       }
       for (int i=0; i<it.second; i++) {
         mls.feedFlowKey(it.first);
       }
     }
+
+    cout << "number of large flows: " << largeflows.size() << endl;
 
     // vector<vector<double>> distributions = mls.computeDistribution();
     // cout << distributions.size() << endl;
@@ -117,7 +126,28 @@ int main(int argc, char* argv[]) {
     //   cout << it[0] << ' ' << it[1] << endl;
     // }
 
-    cout << "Print sketch of level 0" << endl;
+    // cout << "Print sketch of level 0" << endl;
+    // vector<vector<vector<int>>> sketch = mls.getSketch();
+    // for (int i=0; i<sketch.size(); i++) {
+    //   for (int j=0; j<sketch[0].size(); j++) {
+    //     cout << sketch[i][j][0] << ' ';
+    //   }
+    //   cout << endl;
+    // }
+    // cout << endl;
+
+    // cout << endl << "extract large flow" << endl << endl;
+    unordered_map<string, int> lfm;
+    unordered_map<string, vector<double>> blp;
+    mls.modelInference(0.5, lfm, blp);
+    // cout << endl << "extracted large flows: " << endl; 
+    // for (auto it=lfm.begin(); it!=lfm.end(); it++) {
+    //   cout << it->first << ' ' << it->second << endl;
+    // }
+    // cout << endl;
+    cout << "number of extracted flows: " << lfm.size() << endl;
+    cout << endl;
+
     vector<vector<vector<int>>> sketch = mls.getSketch();
     for (int i=0; i<sketch.size(); i++) {
       for (int j=0; j<sketch[0].size(); j++) {
@@ -127,15 +157,50 @@ int main(int argc, char* argv[]) {
     }
     cout << endl;
 
-    cout << endl << "extract large flow" << endl << endl;
-    unordered_map<string, int> lfm;
-    unordered_map<string, vector<double>> blp;
-    mls.modelInference(0.5, lfm, blp);
-    cout << endl << "extracted large flows: " << endl; 
-    for (auto it=lfm.begin(); it!=lfm.end(); it++) {
-      cout << it->first << ' ' << it->second << endl;
+    int largematch = 0;
+    for (auto it : largeflows) {
+      if (lfm.find(it.first)!=lfm.end()) {
+        largematch++;
+        int diff = abs(it.second-lfm[it.first]);
+        if (1.0*diff/it.second>0) {
+          cout << "freq estimate error: " << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
+          string key = it.first;
+          int c = kfs.getHashedValue(key, 0);
+          cout << c << endl;
+          for (int i=0; i<=320; i++) {
+            cout << sketch[0][c][i] << ' ';
+          }
+          cout << endl;
+        }
+      }
+      else {
+        cout << "failed to extract error: " << it.first << ' ' << it.second << endl; 
+      }
     }
-    cout << endl;
+    cout << "large flow recall: " << 1.0*largematch/(largeflows.size()+1e-10) << endl;
+
+    // for (int i=0; i<sketch[0].size(); i++) {
+    //   for (int k=0; k<=320; k++) {
+    //     cout << sketch[0][i][k] << ' ';
+    //   }
+    //   cout << endl;
+    // }
+
+    int match = 0;
+    for (auto it : freqs) {
+      if (lfm.find(it.first)!=lfm.end()) {
+        match++;
+        int diff = abs(it.second-lfm[it.first]);
+        if (1.0*diff/it.second>0.1) {
+          // cout << "freq estimate error: " << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
+        }
+      }
+      else {
+        cout << "failed to extract error: " << it.first << ' ' << it.second << endl; 
+      }
+    }
+    cout << "total flow recall: " << 1.0*match/(freqs.size()+1e-10) << endl;
+    cout << "total flow precision: " << 1.0*match/(lfm.size()+1e-10) << endl;
   }
   else {
     MultiLevelSketch mls(stoi(args["k"]), stoi(args["m"]), 160, 0);
@@ -209,15 +274,16 @@ int main(int argc, char* argv[]) {
     //   cout << distributions[k][0] << ' ' << distributions[k][1] << endl;
     // }
 
-    cout << endl << "extract large flow" << endl << endl;
+    // cout << endl << "extract large flow" << endl << endl;
     unordered_map<string, int> lfm;
     unordered_map<string, vector<double>> blp;
     mls.modelInference(0.5, lfm, blp);
-    cout << endl << "extracted large flows: " << endl; 
-    for (auto it=lfm.begin(); it!=lfm.end(); it++) {
-      cout << it->first << ' ' << it->second << endl;
-    }
-    cout << endl;
+    // cout << endl << "extracted large flows: " << endl; 
+    // for (auto it=lfm.begin(); it!=lfm.end(); it++) {
+    //   cout << it->first << ' ' << it->second << endl;
+    // }
+    // cout << endl;
+    cout << "number of extracted large flows: " << lfm.size() << endl;
 
     // cout << "query small flow" << endl;
     // int count = 0;

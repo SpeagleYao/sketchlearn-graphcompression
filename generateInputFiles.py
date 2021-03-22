@@ -4,6 +4,7 @@ import pygraphviz as pgv
 import argparse
 import random
 import copy
+import os
 from networkx.generators.random_graphs import erdos_renyi_graph
 
 
@@ -70,10 +71,11 @@ def generatePackets(g, n):
     random.shuffle(nodes)
     time = 0
     if random.random()<0.005:
-      time = random.randint(900, 1000)
+      time = random.randint(500, 1000)
       print(time)
+      # pass
     else:
-      time = random.randint(2, 4)
+      time = random.randint(1, 3)
     for j in range(time):
       res.append([nodes[0], nodes[1], "word"])
   return res
@@ -84,23 +86,29 @@ if __name__=='__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("-si", type=str, default="./data/images/test.png")
   parser.add_argument("-sf", type=str, default="./data/packet-forward/test1.db")
+  parser.add_argument("-s", type=str)
   parser.add_argument("-n", type=int, default=6)
   parser.add_argument("-p", type=float, default=0.5)
   args = parser.parse_args()
 
-  f = open(args.sf, 'w')
+  if not os.path.exists(args.s):
+    os.mkdir(args.s)
+  si = args.s+"/test.png"
+  sf = args.s+"/test.db"
+  
+  f = open(sf, 'w')
 
   g = erdos_renyi_graph(args.n, args.p);
   # print(g.nodes);
   # print(g.edges);
-  drawGraph(g, args.si)
+  drawGraph(g, si)
 
   routes = buildRouteTable(g)
   for node in routes:
     for dest in routes[node]:
       f.write("route "+str(node+1)+" "+str(dest+1)+" "+str(routes[node][dest][0]+1)+"\n")
 
-  packets = generatePackets(g, 200)
+  packets = generatePackets(g, 1000)
   for src, dst, word in packets:
     f.write("packet "+str(src+1)+" "+str(src+1)+" "+str(dst+1)+" "+word+"\n")
 

@@ -56,6 +56,7 @@ public:
   void feedFlowKey(string flowkey);
 
   vector<vector<vector<int>>> getSketch();
+  KHashFunctions getKHashFunctions();
 
   void modelInference(double theta, unordered_map<int, int>& lfm, unordered_map<int, vector<double>>& blp);
   void modelInference(double theta, unordered_map<string, int>& lfm, unordered_map<string, vector<double>>& blp);
@@ -66,7 +67,8 @@ public:
   bool extractLargeFlows(double theta, int r, int c, vector<vector<double>>& distributions,
                         unordered_map<string, int>& lfm, unordered_map<string, vector<double>>& blp);
   int estimateFrequence(int r, int c, vector<int>& f, vector<vector<double>>& distributions);
-  int queryFrequence(int key);
+  int estimateFrequence(int r, int c, int s, int e, vector<int>& f, vector<vector<double>>& distributions);
+  unordered_map<string, int> queryFrequence(string key);
   // int queryFrequence_v2(int key);
 
   unordered_set<int> enumerateCandidates(vector<int>& temp);

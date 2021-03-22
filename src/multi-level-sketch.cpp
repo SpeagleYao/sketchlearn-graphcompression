@@ -31,6 +31,7 @@ vector<int> hexStringToVector(string& s) {
     string ts = hexStringTable[s[i]];
     for (int j=0; j<4; j++) {
       res[i*4+j] = ts[j]-'0';
+      // if (res[i*4+j]<0) cout << s << endl;
     }
   }
   return res;
@@ -172,7 +173,7 @@ void MultiLevelSketch::feedFlowKey(string flowkey) {
     int c = hashed[r];
     this->sketch[r][c][0]++;
     for (int k=0; k<this->K; k++) {
-      if (booleans[k]) {
+      if (booleans[k]==1) {
         this->sketch[r][c][k+1]++;
       }
     }
@@ -183,6 +184,11 @@ void MultiLevelSketch::feedFlowKey(string flowkey) {
 
 vector<vector<vector<int>>> MultiLevelSketch::getSketch() {
   return this->sketch;
+}
+
+
+KHashFunctions MultiLevelSketch::getKHashFunctions() {
+  return this->khfs;
 }
 
 
@@ -234,8 +240,13 @@ void MultiLevelSketch::modelInference(double theta, unordered_map<int, int>& lfm
 void MultiLevelSketch::modelInference(double theta, unordered_map<string, int>& lfm, unordered_map<string, vector<double>>& blp) {
   vector<vector<double>> distributions = computeDistribution_v2();
   int count = 0;
+  // cout << "print initial sketch" << endl;
+  // for (int k=0; k<=320; k++) {
+  //   cout << sketch[0][42][k] << ' ';
+  // }
+  // cout << endl;
   while (true) {
-    cout << "new round" << endl;
+    // cout << "new round" << endl;
     // if (terminate()) {
     //   return;
     // }
@@ -258,22 +269,23 @@ void MultiLevelSketch::modelInference(double theta, unordered_map<string, int>& 
       blp[it->first] = it->second;
     }
     removeFlows(lfmt);
-    cout << "print sketch after remove large flows" << endl;
-    for (int r=0; r<this->R; r++) {
-      for (int c=0; c<this->C; c++) {
-        cout << this->sketch[r][c][0] << ' ';
-      }
-      cout << endl;
-    }
+    // cout << "print sketch after remove large flows" << endl;
+    // for (int r=0; r<this->R; r++) {
+    //   for (int c=0; c<this->C; c++) {
+    //     cout << this->sketch[r][c][0] << ' ';
+    //   }
+    //   cout << endl;
+    // }
     distributions = computeDistribution_v2();
     if (terminate()||!flag) {
+      cout << flag << endl;
       break;
     }
     if (lfmt.size()==0) {
       theta /= 2;
       count++;
     }
-    cout << endl;
+    // cout << endl;
   }
 }
 
@@ -444,6 +456,12 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
   unordered_map<string, vector<double>> blpt;
   // estinate bit-level probabilities.
   vector<double> phat;
+  // if (r==0&&c==42) {
+  //   for (int k=0; k<=320; k++) {
+  //     cout << sketch[r][c][k] << ' ';
+  //   }
+  //   cout << endl;
+  // }
   for (int k=1; k<=this->K; k++) {
     double ratio = 1.0 * (this->sketch[r][c][k]) / (this->sketch[r][c][0]+1e-10);
     // cout << r << ' ' << c << ' ' << k << ' ' << ratio << endl;
@@ -481,24 +499,37 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
       count++;
     }
   }
-  if (count>10) {
+  if (count>20) {
     return false;
   }
-  // for (int ele : temp) {
-  //   cout << ele << ' ';
+  // if (r==0&&c==42) {
+  //   for (int ele : temp) {
+  //     cout << ele << ' ';
+  //   }
+  //   cout << endl;
   // }
-  // cout << endl;
   // enumerate all flow keys which match the template
   unordered_set<string> candidates  = enumerateHexStringCandidates(temp);
   // find the flow keys whose hashed value equals j
   for (auto s : candidates) {
+    // if (s=="a48ee0405e4a40343096607a69e7cc3ee20238586f2f98d49bc9cb6d74d695fc406169fc6c7fd33") {
+    //   cout << "find" << endl;
+    // }
     string shifted = s.substr(0, s.size()-shift/4);
     if (this->khfs.getHashedValue((shifted), r)==c) {
       if (lfmt.find(s)==lfmt.end()) {
         vector<int> f = hexStringToVector(s);
         // cout << "detect " << *it << endl;
         // estimate its frequence
-        lfmt[s] = estimateFrequence(r, c, f, distributions);
+        // lfmt[s] = estimateFrequence(r, c, 0, K, f, distributions);
+        int f1 = estimateFrequence(r, c, 0, shift, f, distributions);
+        int f2 = estimateFrequence(r, c, shift, K, f, distributions);
+        if (f2<=f1) {
+          lfmt[s] = estimateFrequence(r, c, shift, K, f, distributions);
+        }
+        else {
+          break;
+        }
         // cout << "frequence of " << *it << ' ' << lfmt[*it] << endl;
         // associate bit-level probabilities
         vector<double> tv;
@@ -544,6 +575,28 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
 int MultiLevelSketch::estimateFrequence(int r, int c, vector<int>& f, vector<vector<double>>& distributions) {
   vector<double> freqs;
   for (int k=0; k<this->K; k++) {
+    double ratio = 1.0*this->sketch[r][c][k+1]/this->sketch[r][c][0];
+    double sf;
+    if (f[k]==1) {
+      sf = ((ratio-(distributions[k][0])) / (1-distributions[k][0])) * this->sketch[r][c][0];
+    }
+    else {
+      sf = (1-((ratio)/(distributions[k][0]+1e-10))) * this->sketch[r][c][0];
+    }
+    if (sf<0) {
+      // cout << "detection abnormal " << sf << ' ' << f[k] << ' ' << ratio << ' ' << distributions[k][0] << endl; 
+      // continue;
+    }
+    freqs.push_back(sf);
+  }
+  sort(freqs.begin(), freqs.end());
+  return median(freqs);
+}
+
+
+int MultiLevelSketch::estimateFrequence(int r, int c, int s, int e, vector<int>& f, vector<vector<double>>& distributions) {
+  vector<double> freqs;
+  for (int k=s; k<e; k++) {
     double ratio = 1.0*this->sketch[r][c][k+1]/this->sketch[r][c][0];
     double sf;
     if (f[k]==1) {
@@ -719,7 +772,7 @@ bool MultiLevelSketch::terminate(int denominator, vector<vector<double>>& distri
 
 
 bool MultiLevelSketch::terminate() {
-  cout << "check termination " << endl;
+  // cout << "check termination " << endl;
   int denominator = R*C*K;
   int lessOne = 0;
   int lessTwo = 0;
@@ -750,7 +803,7 @@ bool MultiLevelSketch::terminate() {
   double r1 = 1.0*lessOne/denominator;
   double r2 = 1.0*lessTwo/denominator;
   double r3 = 1.0*lessThree/denominator;
-  cout << r1 << ' ' << r2 << ' ' << r3 << endl;
+  // cout << r1 << ' ' << r2 << ' ' << r3 << endl;
   // if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
   //   return true;
   // }
