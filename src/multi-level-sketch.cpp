@@ -616,30 +616,10 @@ int MultiLevelSketch::estimateFrequence(int r, int c, int s, int e, vector<int>&
 }
 
 
-int MultiLevelSketch::queryFrequence(int key) {
-  vector<int> f = intToVector(key);
-  vector<vector<double>> distributions = this->computeDistribution_v2();
-  vector<int> fs;
-  for (int r=0; r<R; r++) {
-    int c = this->khfs.getHashedValue((key>>shift), r);
-    int freq = estimateFrequence(r, c, f, distributions);
-    fs.push_back(freq);
-  }
-  return median(fs);
+unordered_map<string, int> MultiLevelSketch::queryFrequence(string key) {
+  unordered_map<string, int> res;
+  return res;
 }
-
-
-// int MultiLevelSketch::queryFrequence_v2(int key) {
-//   vector<int> f = intToVector(key);
-//   vector<vector<double>> distributions = this->computeDistribution_v2();
-//   vector<int> fs;
-//   for (int r=0; r<R; r++) {
-//     int c = this->khfs.getHashedValue(key, r);
-
-//     fs.push_back(freq);
-//   }
-//   return median(fs);
-// }
 
 
 unordered_set<int> MultiLevelSketch::enumerateCandidates(vector<int>& temp) {
