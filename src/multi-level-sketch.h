@@ -54,8 +54,12 @@ public:
 
   void feedFlowKey(int flowkey);
   void feedFlowKey(string flowkey);
+  void feedFlowKey(string flowkey, int freq);
+
+  void printSketchTable();
 
   vector<vector<vector<int>>> getSketch();
+  vector<vector<vector<int>>> getSketchBackUp();
   KHashFunctions getKHashFunctions();
 
   void modelInference(double theta, unordered_map<int, int>& lfm, unordered_map<int, vector<double>>& blp);
@@ -84,7 +88,10 @@ private:
 
   KHashFunctions khfs;
   vector<vector<vector<int>>> sketch;
+  vector<vector<vector<int>>> sketchbackup;
   unordered_map<int, int> largeFlows;
+
+  vector<vector<vector<int>>> initialEmptySketch();
 
   void recursivelyEnumerateCandidates(vector<int>& temp, int pos, vector<int>& tmp, unordered_set<int>& res);
   void recursivelyEnumerateCandidates(vector<int>& temp, int pos, vector<int>& tmp, unordered_set<string>& res);

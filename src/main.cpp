@@ -16,6 +16,7 @@ using namespace std;
 
 
 int readFromFile(string& filepath, unordered_map<string, int>& freqs) {
+  cout << "reading from file " << filepath << endl;
   ifstream fp(filepath);
   string line;
   int count = 0;
@@ -30,6 +31,7 @@ int readFromFile(string& filepath, unordered_map<string, int>& freqs) {
       }
       else {
         cout << "duplicate edges!" << endl;
+        cout << splits[0] << ' ' << splits[1] <<endl;
       }
     }
   }
@@ -64,8 +66,256 @@ string generateRandomHexString(int length) {
   return s;
 }
 
-int main(int argc, char* argv[]) {
 
+// int main(int argc, char* argv[]) {
+
+//   unordered_map<string, string> args;
+//   vector<string> argvs;
+//   for (int i=0; i<argc; i++) {
+//     argvs.push_back(string(argv[i]));
+//   }
+//   for (int i=1; i<argc; i+=2) {
+//     assert(i+1<argc);
+//     if (argvs[i]=="-k") {
+//       args["k"] = argvs[i+1];
+//     }
+//     else if (argvs[i]=="-m") {
+//       args["m"] = argvs[i+1];
+//     }
+//     else if (argvs[i]=="-f") {
+//       args["f"] = argvs[i+1];
+//     }
+//   }
+
+//   // pre-process of the data
+//   unordered_map<string, int> freqs;
+//   unordered_map<string, int> largeflows;
+//   unordered_map<string, int> n1s;
+//   int flownumber = readFromFile(args["f"], freqs);
+//   int totalnumber = 0;
+//   for (auto it : freqs) {
+//     totalnumber += it.second;
+//   }
+//   int thre = totalnumber/stoi(args["m"]);
+   
+
+//   // build hierarchy mls
+//   int R = stoi(args["k"]);
+//   // int C = stoi(args["m"]);
+//   // int C = log(totalnumber);
+//   int C = stoi(args["m"]);
+//   cout << C << endl;
+//   int K = 336;
+//   MultiLevelSketch mls (R, C, K/2, 0);
+//   KHashFunctions kfs = mls.getKHashFunctions();
+//   vector<MultiLevelSketch> mlses;
+//   for (int i=0; i<R*C; i++) {
+//     MultiLevelSketch mlst (R, C, K/2, 0);
+//     mlses.push_back(mlst);
+//   }
+//   for (auto it : freqs) {
+//     string f = it.first;
+//     int freq = it.second;
+//     string n1 = f.substr(0, 42);
+//     string n2 = f.substr(42, 84);
+//     mls.feedFlowKey(n1, freq);
+//     for (int r=0; r<R; r++) {
+//       int c = kfs.getHashedValue(n1, r);
+//       mlses[r*C+c].feedFlowKey(n2, freq);
+//     }
+//     // if it is large flow
+//     if (freq>thre) {
+//       largeflows.insert(it);
+//     }
+//     n1s[n1] += freq;
+//   }
+
+//   cout << "number of distinct flows: " << flownumber << endl;
+//   cout << "total frequency: " << totalnumber << endl;
+//   cout << "number of n1s: " << n1s.size() << endl;
+
+//   unordered_map<string, int> lfm;
+//   unordered_map<string, vector<double>> blp;
+//   mls.modelInference(0.5, lfm, blp);
+//   int match = 0;
+//   for (auto it : n1s) {
+//     if (lfm.find(it.first)!=lfm.end()) {
+//       match++;
+//     }
+//   }
+//   cout << "recall of n1s: " << 1.0*match/n1s.size() << endl;
+//   cout << "precision of n1s: " << 1.0*match/(lfm.size()+1e-10) << endl;
+
+//   match = 0;
+//   vector<unordered_map<string, int>> lfms;
+//   vector<unordered_map<string, vector<double>>> blps;
+//   for (int r=0; r<R; r++) {
+//     for (int c=0; c<C; c++) {
+//       lfms.push_back(unordered_map<string, int> ());
+//       blps.push_back(unordered_map<string, vector<double>> ());
+//       mlses[r*C+c].modelInference(0.5, lfms[r*C+c], blps[r*C+c]);
+//     }
+//   }
+//   for (auto it : n1s) {
+//     string n1 = it.first;
+//     int freq = it.second;
+//     unordered_map<string, int> lfmt;
+//     int c0 = kfs.getHashedValue(n1, 0);
+//     for (auto itt : lfms[c0]) {
+//       string n2 = itt.first;
+//       bool flag = true;
+//       for (int r=1; r<R; r++) {
+//         int c = kfs.getHashedValue(n1, r);
+//         if (lfms[r*C+c].find(n2)==lfms[r*C+c].end()) {
+//           flag = false;
+//           break;
+//         }
+//       }
+//       if (flag) {
+//         lfmt[n1+itt.first] = itt.second;
+//       }
+//     }
+//     for (auto itt : lfmt) {
+//       if (freqs.find(itt.first)!=freqs.end()) {
+//         match++;
+//       }
+//     }
+//   }
+//   cout << "total recall: " << match*1.0/freqs.size();
+// }
+
+
+
+
+
+
+
+// int main(int argc, char* argv[]) {
+
+//   unordered_map<string, string> args;
+//   vector<string> argvs;
+//   for (int i=0; i<argc; i++) {
+//     argvs.push_back(string(argv[i]));
+//   }
+//   for (int i=1; i<argc; i+=2) {
+//     assert(i+1<argc);
+//     if (argvs[i]=="-k") {
+//       args["k"] = argvs[i+1];
+//     }
+//     else if (argvs[i]=="-m") {
+//       args["m"] = argvs[i+1];
+//     }
+//     else if (argvs[i]=="-f") {
+//       args["f"] = argvs[i+1];
+//     }
+//   }
+
+//   // pre-process of the data
+//   unordered_map<string, int> freqs;
+//   int flownumber = readFromFile(args["f"], freqs);
+//   int totalnumber = 0;
+//   for (auto it : freqs) {
+//     totalnumber += it.second;
+//   }
+//   int thre = totalnumber/stoi(args["m"]);
+   
+
+//   // build distributed mls
+//   unordered_map<string, MultiLevelSketch> mlses;
+//   unordered_map<string, unordered_map<string, int>> freqOfNode;
+//   for (auto it : freqs) {
+//     string f = it.first;
+//     int freq = it.second;
+//     string node = f.substr(0, 2);
+//     if (mlses.find(node)==mlses.end()) {
+//       mlses[node] = MultiLevelSketch(stoi(args["k"]), stoi(args["m"]), 336, 0);
+//       freqOfNode[node] = unordered_map<string, int> ();
+//     }
+//     mlses[node].feedFlowKey(f, freq);
+//     freqOfNode[node][f] = freq;
+//   }
+
+//   cout << "number of distinct flows: " << flownumber << endl;
+//   cout << "total frequency: " << totalnumber << endl;
+
+//   for (auto it : mlses) {
+//     int match = 0;
+//     int largematch = 0;
+//     string node = it.first;
+//     cout << "node " << node << endl;
+//     cout << "total flow number: " << freqOfNode[node].size() << endl;
+//     int totalfreq = 0;
+//     for (auto it : freqOfNode[node]) {
+//       totalfreq += it.second;
+//     }
+//     int thre = totalfreq*1.0/stoi(args["m"]);
+//     unordered_map<string, int> largeflows;
+//     int largeflownumber = 0;
+//     for (auto it : freqOfNode[node]) {
+//       if (it.second>thre) {
+//         largeflownumber++;
+//         largeflows.insert(it);
+//       }
+//     }
+//     cout << "threshold: " << thre << ", number of largeflows: " << largeflownumber << endl;
+
+//     unordered_map<string, int> lfm;
+//     unordered_map<string, vector<double>> blp;
+//     mlses[node].modelInference(0.5, lfm, blp);
+//     for (auto it : largeflows) {
+//       string f = it.first;
+//       int freq = it.second;
+//       int diff = abs(freq-freqOfNode[node][f]);
+//       if (lfm.find(f)!=lfm.end()&&
+//           diff*1.0/freqOfNode[node][f]<1.0
+//           ) {
+//         largematch++;
+//       }
+//     }
+//     cout << "large flow recall: " << 1.0*largematch/(largeflows.size()+1e-10) << endl;
+//     for (auto it : freqOfNode[node]) {
+//       string f = it.first;
+//       int freq = it.second;
+//       if (lfm.find(f)!=lfm.end()
+//           // &&abs(lfm[f]-freq)>=1
+//           ) {
+//         match++;
+//       }
+//     }
+//     cout << "flowkey types: " << freqOfNode[node].size() << ' ' << "extracted: " << match << endl;
+//     double recall = match*1.0/freqOfNode[node].size();
+//     // if (recall<1) {
+//     //   cout << "recall: " << recall << endl;
+//     //   for (auto it : freqOfNode[node]) {
+//     //     if (abs(it.second-lfm[it.first])>=1) {
+//     //       cout << "FN: " << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
+//     //     }
+//     //   }
+//     //   mlses[node].printSketchTable();
+//     // }
+//     for (auto it : lfm) {
+//       if (freqOfNode[node].find(it.first)==freqOfNode[node].end()) {
+//         cout << "FP: " << it.first << ' ' << it.second << endl;
+//       }
+//     }
+//     cout << endl;
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main(int argc, char* argv[]) {
+  cout << "program start" << endl;
   unordered_map<string, string> args;
   vector<string> argvs;
   for (int i=0; i<argc; i++) {
@@ -82,15 +332,10 @@ int main(int argc, char* argv[]) {
     else if (argvs[i]=="-f") {
       args["f"] = argvs[i+1];
     }
+    else if (argvs[i]=="-p") {
+      args["p"] = argvs[i+1];
+    }
   }
-
-  // vector<int> t = intToVector(7);
-  // for (auto it=t.begin(); it!=t.end(); it++) {
-  //   cout << *it << ' ';
-  // }
-  // cout << endl;
-  // int nt = vectorToInt(t);
-  // cout << nt << endl;
 
   if (args.find("f")!=args.end()) {
     // pre-process of the data
@@ -101,33 +346,53 @@ int main(int argc, char* argv[]) {
     for (auto it : freqs) {
       totalnumber += it.second;
     }
-    int thre = totalnumber/stoi(args["m"]);
     cout << "number of distinct flows: " << flownumber << endl;
     cout << "total frequency: " << totalnumber << endl; 
-    cout << "minimum frequency to be large flow: " << thre << endl;
 
-    MultiLevelSketch mls(stoi(args["k"]), stoi(args["m"]), 320, 160);
+    int R = stoi(args["k"]);
+    // vector<int> fs;
+    // for (auto it : freqs) {
+    //   fs.push_back(it.second);
+    // }
+    // sort(fs.begin(), fs.end());
+    // int accu = 0;
+    // int thre;
+    // for (int i=fs.size()-1; i>=0; i--) {
+    //   accu += fs[i];
+    //   thre = fs[i]-1;
+    //   if (accu*1.0/totalnumber>=stod(args["p"])) {
+    //     break;
+    //   }
+    // }
+    // int C = totalnumber/thre;
+    int C = stoi(args["m"]);
+    int thre = totalnumber/C;
+    cout << "target thre: " << thre << " c: " << C << endl;
+    MultiLevelSketch mls(R, C, 336, 0);
     KHashFunctions kfs = mls.getKHashFunctions();
     for (auto it : freqs) {
       if (it.second>thre) {
         // cout << "large flow: " << it.first << ' ' << it.second << endl;
         largeflows.insert(it);
       }
-      for (int i=0; i<it.second; i++) {
-        mls.feedFlowKey(it.first);
-      }
+      mls.feedFlowKey(it.first, it.second);
     }
-
     cout << "number of large flows: " << largeflows.size() << endl;
 
-    // vector<vector<double>> distributions = mls.computeDistribution();
-    // cout << distributions.size() << endl;
-    // for (auto it : distributions) {
-    //   cout << it[0] << ' ' << it[1] << endl;
+    unordered_map<string, int> lfm;
+    unordered_map<string, vector<double>> blp;
+    mls.modelInference(0.5, lfm, blp);
+    // cout << endl << "extracted large flows: " << endl; 
+    // for (auto it : lfm) {
+    //   if (it.second>thre) {
+    //     cout << it.first << ' ' << it.second << endl;
+    //   }
     // }
+    // cout << endl;
+    cout << "number of extracted flows: " << lfm.size() << endl;
+    cout << endl;
 
-    // cout << "Print sketch of level 0" << endl;
-    // vector<vector<vector<int>>> sketch = mls.getSketch();
+    vector<vector<vector<int>>> sketch = mls.getSketch();
     // for (int i=0; i<sketch.size(); i++) {
     //   for (int j=0; j<sketch[0].size(); j++) {
     //     cout << sketch[i][j][0] << ' ';
@@ -135,42 +400,29 @@ int main(int argc, char* argv[]) {
     //   cout << endl;
     // }
     // cout << endl;
-
-    // cout << endl << "extract large flow" << endl << endl;
-    unordered_map<string, int> lfm;
-    unordered_map<string, vector<double>> blp;
-    mls.modelInference(0.5, lfm, blp);
-    // cout << endl << "extracted large flows: " << endl; 
-    // for (auto it=lfm.begin(); it!=lfm.end(); it++) {
-    //   cout << it->first << ' ' << it->second << endl;
+    vector<vector<vector<int>>> sketchbackup = mls.getSketchBackUp();
+    // for (int i=0; i<sketchbackup.size(); i++) {
+    //   for (int j=0; j<sketchbackup[0].size(); j++) {
+    //     cout << sketchbackup[i][j][0] << ' ';
+    //   }
+    //   cout << endl;
     // }
     // cout << endl;
-    cout << "number of extracted flows: " << lfm.size() << endl;
-    cout << endl;
-
-    vector<vector<vector<int>>> sketch = mls.getSketch();
-    for (int i=0; i<sketch.size(); i++) {
-      for (int j=0; j<sketch[0].size(); j++) {
-        cout << sketch[i][j][0] << ' ';
-      }
-      cout << endl;
-    }
-    cout << endl;
 
     int largematch = 0;
     for (auto it : largeflows) {
       if (lfm.find(it.first)!=lfm.end()) {
         largematch++;
         int diff = abs(it.second-lfm[it.first]);
-        if (1.0*diff/it.second>0) {
+        if (1.0*diff/it.second>0.1) {
           cout << "freq estimate error: " << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
-          string key = it.first;
-          int c = kfs.getHashedValue(key, 0);
-          cout << c << endl;
-          for (int i=0; i<=320; i++) {
-            cout << sketch[0][c][i] << ' ';
-          }
-          cout << endl;
+          // string key = it.first;
+          // int c = kfs.getHashedValue(key, 0);
+          // cout << c << endl;
+          // for (int i=0; i<=320; i++) {
+          //   cout << sketch[0][c][i] << ' ';
+          // }
+          // cout << endl;
         }
       }
       else {
@@ -178,13 +430,6 @@ int main(int argc, char* argv[]) {
       }
     }
     cout << "large flow recall: " << 1.0*largematch/(largeflows.size()+1e-10) << endl;
-
-    // for (int i=0; i<sketch[0].size(); i++) {
-    //   for (int k=0; k<=320; k++) {
-    //     cout << sketch[0][i][k] << ' ';
-    //   }
-    //   cout << endl;
-    // }
 
     int match = 0;
     for (auto it : freqs) {
@@ -194,6 +439,7 @@ int main(int argc, char* argv[]) {
         if (1.0*diff/it.second>0.1) {
           // cout << "freq estimate error: " << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
         }
+        cout << it.first << ' ' << it.second << ' ' << lfm[it.first] << endl;
       }
       else {
         cout << "failed to extract error: " << it.first << ' ' << it.second << endl; 
@@ -201,6 +447,7 @@ int main(int argc, char* argv[]) {
     }
     cout << "total flow recall: " << 1.0*match/(freqs.size()+1e-10) << endl;
     cout << "total flow precision: " << 1.0*match/(lfm.size()+1e-10) << endl;
+    cout << endl;
   }
   else {
     MultiLevelSketch mls(stoi(args["k"]), stoi(args["m"]), 160, 0);
@@ -247,15 +494,6 @@ int main(int argc, char* argv[]) {
     cout << "total frequency: " << totalnumber << endl; 
     cout << "minimum frequency to be large flow: " << totalnumber/stoi(args["m"]) << endl;
 
-    // int largeFlow = rand()%(RAND_MAX/2);
-    // cout << "random large flow is " << largeFlow << endl;
-    // for (int i=0; i<100; i++) {
-    //   mls.feedFlowKey(largeFlow);
-    // }
-    // for (auto it=freqs.begin(); it!=freqs.end(); it++) {
-    //   cout << *it << ' ';
-    // }
-
     cout << "Print sketch of level 0" << endl;
     vector<vector<vector<int>>> sketch = mls.getSketch();
     for (int i=0; i<sketch.size(); i++) {
@@ -266,50 +504,16 @@ int main(int argc, char* argv[]) {
     }
     cout << endl;
 
-    // exit(0);
-
-    // cout << "Print estimated mean and variance for each level" << endl;
-    // vector<vector<double>> distributions = mls.computeDistribution();
-    // for (int k=0; k<distributions.size(); k++) {
-    //   cout << distributions[k][0] << ' ' << distributions[k][1] << endl;
-    // }
-
-    // cout << endl << "extract large flow" << endl << endl;
     unordered_map<string, int> lfm;
     unordered_map<string, vector<double>> blp;
     mls.modelInference(0.5, lfm, blp);
-    // cout << endl << "extracted large flows: " << endl; 
-    // for (auto it=lfm.begin(); it!=lfm.end(); it++) {
-    //   cout << it->first << ' ' << it->second << endl;
-    // }
-    // cout << endl;
+    cout << endl << "extracted large flows: " << endl; 
+    for (auto it=lfm.begin(); it!=lfm.end(); it++) {
+      cout << it->first << ' ' << it->second << endl;
+    }
+    cout << endl;
     cout << "number of extracted large flows: " << lfm.size() << endl;
-
-    // cout << "query small flow" << endl;
-    // int count = 0;
-    // for (auto it : smallflows) {
-    //   int fp = mls.queryFrequence(it.first);
-    //   int fd = it.second;
-    //   cout << it.first << ' ' << fd << ' ' << fp << endl;
-    //   count++;
-    //   if (count==10) break;
-    // }
-
-    // cout << endl;
-
-    // // test hex string to vector
-    // cout << moduloHexString("AB", 16) << endl;
-    // for (int i=0; i<10; i++) {
-    //   string s = generateRandomHexString(40);
-    //   cout << s << endl;
-    //   vector<int> v = hexStringToVector(s);
-    //   for (auto ele : v) {
-    //     cout << ele << ' ';
-    //   }
-    //   cout << endl;
-    //   cout << vectorToHexString(v) << endl;
-    // }
   }
-
-  
 }
+
+

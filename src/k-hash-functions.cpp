@@ -51,8 +51,8 @@ KHashFunctions::KHashFunctions(int k, int m) {
   this->k = k;
   this->m = m;
 
-  mt19937 rng(current_time_nanoseconds());
-  // mt19937 rng(1234);
+  // mt19937 rng(current_time_nanoseconds());
+  mt19937 rng(1234);
   uniform_int_distribution<> uniform_distributor(1,RAND_MAX/2);
   for (int i=0; i<k; i++) {
     int a = uniform_distributor(rng);

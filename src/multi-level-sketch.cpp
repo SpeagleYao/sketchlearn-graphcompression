@@ -119,7 +119,11 @@ MultiLevelSketch::MultiLevelSketch(int r, int c, int k, int s) {
   this->K = k;
   this->shift = s;
   this->khfs = KHashFunctions(r, c);
-  initSketch();
+  // initSketch();
+  this->sketch = initialEmptySketch();
+  if (s!=0) {
+    this->sketchbackup = initialEmptySketch();
+  }
 };
 
 
@@ -134,6 +138,20 @@ void MultiLevelSketch::initSketch() {
     sketchTable.push_back(tmp);
   }
   this->sketch = sketchTable;
+}
+
+
+vector<vector<vector<int>>> MultiLevelSketch::initialEmptySketch() {
+  vector<vector<vector<int>>> sketchTable;
+  for (int i=0; i<this->R; i++) {
+    vector<vector<int>> tmp;
+    for (int j=0; j<this->C; j++) {
+      vector<int> ttmp (this->K+1, 0);
+      tmp.push_back(ttmp);
+    }
+    sketchTable.push_back(tmp);
+  }
+  return sketchTable;
 }
 
 
@@ -181,9 +199,72 @@ void MultiLevelSketch::feedFlowKey(string flowkey) {
 }
 
 
+// void MultiLevelSketch::feedFlowKey(string flowkey, int freq) {
+//   assert(flowkey.size()*4>shift&shift%4==0);
+//   string shifted = flowkey.substr(0, flowkey.size()-shift/4);
+//   vector<int> hashed = this->khfs.getHashedValues(shifted);
+//   vector<int> booleans = hexStringToVector(flowkey);
+//   for (int r=0; r<this->R; r++) {
+//     int c = hashed[r];
+//     this->sketch[r][c][0] += freq;
+//     for (int k=0; k<this->K; k++) {
+//       if (booleans[k]==1) {
+//         this->sketch[r][c][k+1] += freq;
+//       }
+//     }
+//   }
+// }
+
+
+void MultiLevelSketch::feedFlowKey(string flowkey, int freq) {
+  assert(flowkey.size()*4>shift&shift%4==0);
+  vector<int> booleans = hexStringToVector(flowkey);
+
+  string shifted = flowkey.substr(0, flowkey.size()-shift/4);
+  vector<int> hashed = this->khfs.getHashedValues(shifted);
+  for (int r=0; r<this->R; r++) {
+    int c = hashed[r];
+    this->sketch[r][c][0] += freq;
+    for (int k=0; k<this->K; k++) {
+      if (booleans[k]==1) {
+        this->sketch[r][c][k+1] += freq;
+      }
+    }
+  }
+  if (this->sketchbackup.size()!=0) {
+    string toshift = flowkey.substr(flowkey.size()-shift/4, flowkey.size());
+    vector<int> tohashed = this->khfs.getHashedValues(toshift);
+    for (int r=0; r<this->R; r++) {
+      int c = tohashed[r];
+      this->sketchbackup[r][c][0] += freq;
+      for (int k=0; k<this->K; k++) {
+        if (booleans[k]==1) {
+          this->sketchbackup[r][c][k+1] += freq;
+        }
+      }
+    }
+  }
+}
+
+
+
+void MultiLevelSketch::printSketchTable() {
+  for (int r=0; r<R; r++) {
+    for (int c=0; c<C; c++) {
+      cout << sketch[r][c][0] << ' ';
+    }
+    cout << endl;
+  }
+}
+
 
 vector<vector<vector<int>>> MultiLevelSketch::getSketch() {
   return this->sketch;
+}
+
+
+vector<vector<vector<int>>> MultiLevelSketch::getSketchBackUp() {
+  return this->sketchbackup;
 }
 
 
@@ -240,33 +321,19 @@ void MultiLevelSketch::modelInference(double theta, unordered_map<int, int>& lfm
 void MultiLevelSketch::modelInference(double theta, unordered_map<string, int>& lfm, unordered_map<string, vector<double>>& blp) {
   vector<vector<double>> distributions = computeDistribution_v2();
   int count = 0;
-  // cout << "print initial sketch" << endl;
-  // for (int k=0; k<=320; k++) {
-  //   cout << sketch[0][42][k] << ' ';
-  // }
-  // cout << endl;
   while (true) {
-    // cout << "new round" << endl;
-    // if (terminate()) {
-    //   return;
-    // }
-    bool flag = true;
+    int flag = 0;
     unordered_map<string, int> lfmt;
     unordered_map<string, vector<double>> blpt;
     for (int r=0; r<this->R; r++) {
       for (int c=0; c<this->C; c++) {
-        flag &= extractLargeFlows(theta, r, c, distributions, lfmt, blpt);
+        flag += extractLargeFlows(theta, r, c, distributions, lfmt, blpt);
       }
     }
-    // cout << "print out large flows found in this round" << endl;
-    // for (auto it=lfmt.begin(); it!=lfmt.end(); it++) {
-    //   cout << it->first << ' ' << it->second << endl;
-    // }
-    for (auto it=lfmt.begin(); it!=lfmt.end(); it++) {
-      lfm[it->first] = it->second;
-    }
-    for (auto it=blpt.begin(); it!=blpt.end(); it++) {
-      blp[it->first] = it->second;
+    for (auto it : lfmt) {
+      if (lfm.find(it.first)==lfm.end()) {
+        lfm.insert(it);
+      }
     }
     removeFlows(lfmt);
     // cout << "print sketch after remove large flows" << endl;
@@ -277,15 +344,14 @@ void MultiLevelSketch::modelInference(double theta, unordered_map<string, int>& 
     //   cout << endl;
     // }
     distributions = computeDistribution_v2();
-    if (terminate()||!flag) {
-      cout << flag << endl;
+    if (terminate()||flag==0) {
+      // cout << flag << endl;
       break;
     }
     if (lfmt.size()==0) {
-      theta /= 2;
+      theta *= 0.5;
       count++;
     }
-    // cout << endl;
   }
 }
 
@@ -449,19 +515,12 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
   lfm: large flow map, which maps the flow key to its frequence
   blp: bit level probabilities, which maps flow key to bit level probabilities
   */
-  // cout << "row " << r  << ", col " << c << endl;
   assert(r>=0&&r<this->R&&c>=0&&c<this->C);
   // initialize a map to store the large flows
   unordered_map<string, int> lfmt;
   unordered_map<string, vector<double>> blpt;
   // estinate bit-level probabilities.
   vector<double> phat;
-  // if (r==0&&c==42) {
-  //   for (int k=0; k<=320; k++) {
-  //     cout << sketch[r][c][k] << ' ';
-  //   }
-  //   cout << endl;
-  // }
   for (int k=1; k<=this->K; k++) {
     double ratio = 1.0 * (this->sketch[r][c][k]) / (this->sketch[r][c][0]+1e-10);
     // cout << r << ' ' << c << ' ' << k << ' ' << ratio << endl;
@@ -499,37 +558,21 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
       count++;
     }
   }
-  if (count>20) {
+  if (count>10||sketch[r][c][0]==0) {
     return false;
   }
-  // if (r==0&&c==42) {
-  //   for (int ele : temp) {
-  //     cout << ele << ' ';
-  //   }
-  //   cout << endl;
-  // }
   // enumerate all flow keys which match the template
   unordered_set<string> candidates  = enumerateHexStringCandidates(temp);
+
   // find the flow keys whose hashed value equals j
   for (auto s : candidates) {
-    // if (s=="a48ee0405e4a40343096607a69e7cc3ee20238586f2f98d49bc9cb6d74d695fc406169fc6c7fd33") {
-    //   cout << "find" << endl;
-    // }
     string shifted = s.substr(0, s.size()-shift/4);
-    if (this->khfs.getHashedValue((shifted), r)==c) {
-      if (lfmt.find(s)==lfmt.end()) {
+    if (this->khfs.getHashedValue(shifted, r)==c) {
+      if (lfmt.find(s)==lfmt.end()&&lfm.find(s)==lfm.end()) {
         vector<int> f = hexStringToVector(s);
         // cout << "detect " << *it << endl;
         // estimate its frequence
-        // lfmt[s] = estimateFrequence(r, c, 0, K, f, distributions);
-        int f1 = estimateFrequence(r, c, 0, shift, f, distributions);
-        int f2 = estimateFrequence(r, c, shift, K, f, distributions);
-        if (f2<=f1) {
-          lfmt[s] = estimateFrequence(r, c, shift, K, f, distributions);
-        }
-        else {
-          break;
-        }
+        lfmt[s] = estimateFrequence(r, c, 0, K, f, distributions);
         // cout << "frequence of " << *it << ' ' << lfmt[*it] << endl;
         // associate bit-level probabilities
         vector<double> tv;
@@ -542,7 +585,7 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
           }
         }
         blpt[s] = tv;
-        // verify candidate flowkeys
+        // verify candidate from other hash functions
         for (int i=0; i<this->R; i++) {
           if (i!=r) {
             int ic = this->khfs.getHashedValue(shifted, i);
@@ -553,14 +596,39 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
               else if (f[kk]==1 && this->sketch[i][ic][kk+1]<lfmt[s]) {
                 lfmt[s] = this->sketch[i][ic][kk+1];
               }
-              // cout << kk << ' ' << lfmt[*it] << endl;
-              // cout << this->sketch[i][c][0] << ' ' << this->sketch[i][c][kk] << endl;
             }
           }
         }
-        // cout << "after verification " << endl;
-        // cout << *it << ' ' << lfmt[*it] << endl;
-        // cout << endl;
+        // verify candidate from sketchbackup
+        if (sketchbackup.size()!=0) {
+          string toshift = s.substr(s.size()-shift/4, s.size());
+          bool flag = true;
+          for (int i=0; i<R; i++) {
+            int ic = this->khfs.getHashedValue(toshift, i);
+            if (sketchbackup[i][ic][0]<lfmt[s]) {
+              flag = false;
+              break;
+            }
+            for (int kk=0; kk<this->K; kk++) {
+              if (f[kk]==0 && this->sketchbackup[i][ic][0]-this->sketchbackup[i][ic][kk+1]<lfmt[s]) {
+                flag = false;
+                break;
+              }
+              else if (f[kk]==1 && this->sketchbackup[i][ic][kk+1]<lfmt[s]) {
+                flag = false;
+                break;
+              }
+            }
+            if (!flag) {
+              break;
+            }
+          }
+          if (!flag) {
+            lfmt.erase(s);
+            blpt.erase(s);
+            continue;
+          }
+        }
         if (lfmt[s] >= theta*this->sketch[r][c][0]) {
           lfm[s] = lfmt[s];
           blp[s] = blpt[s];
@@ -707,6 +775,22 @@ void MultiLevelSketch::removeFlows(unordered_map<string, int>& lfm) {
       }
     }
   }
+  if (sketchbackup.size()!=0) {
+    for (auto it=lfm.begin(); it!=lfm.end(); it++) {
+      string s = it->first;
+      string toshift = s.substr(s.size()-shift/4, s.size());
+      vector<int> v = hexStringToVector(s);
+      for (int r=0; r<this->R; r++) {
+        int c = this->khfs.getHashedValue(toshift, r);
+        this->sketchbackup[r][c][0] -= it->second;
+        for (int k=0; k<this->K; k++) {
+          if (v[k]==1) {
+            this->sketchbackup[r][c][k+1] -= it->second;
+          }
+        }
+      }
+    }
+  }
 }
 
 
@@ -740,7 +824,6 @@ bool MultiLevelSketch::terminate(int denominator, vector<vector<double>>& distri
   double r1 = 1.0*lessOne/denominator;
   double r2 = 1.0*lessTwo/denominator;
   double r3 = 1.0*lessThree/denominator;
-  cout << r1 << ' ' << r2 << ' ' << r3 << endl;
   if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
     return true;
   }
@@ -752,7 +835,15 @@ bool MultiLevelSketch::terminate(int denominator, vector<vector<double>>& distri
 
 
 bool MultiLevelSketch::terminate() {
-  // cout << "check termination " << endl;
+  // check whether the sketch table is clear
+  int count = 0;
+  for (int r=0; r<R; r++) {
+    for (int c=0; c<C; c++) {
+      count += sketch[r][c][0];
+    }
+  }
+  if (count==0) return true;
+  // check the distribution
   int denominator = R*C*K;
   int lessOne = 0;
   int lessTwo = 0;
@@ -766,7 +857,6 @@ bool MultiLevelSketch::terminate() {
       for (int c=0; c<this->C; c++) {
         double ratio = 1.0*(this->sketch[r][c][k]) / (this->sketch[r][c][0]+1e-10);
         double diff = abs(ratio-mean);
-        // cout << diff << ' ' << std << endl;
         if (diff<=3*std) {
           lessThree++;
         }
@@ -779,15 +869,13 @@ bool MultiLevelSketch::terminate() {
       }
     }
   }
-  // cout << lessOne << ' ' << lessTwo << ' ' << lessThree << endl;
   double r1 = 1.0*lessOne/denominator;
   double r2 = 1.0*lessTwo/denominator;
   double r3 = 1.0*lessThree/denominator;
-  // cout << r1 << ' ' << r2 << ' ' << r3 << endl;
   // if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
   //   return true;
   // }
-  if (r1>0.67&&r2>0.94&&r3>0.98) {
+  if (r1>1 && r2>1 && r3>1) {
     return true;
   }
   return false;

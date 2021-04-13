@@ -70,8 +70,8 @@ def generatePackets(g, n):
   for i in range(n):
     random.shuffle(nodes)
     time = 0
-    if random.random()<0.005:
-      time = random.randint(500, 1000)
+    if random.random()<0.5:
+      time = random.randint(40, 50)
       print(time)
       # pass
     else:
@@ -82,6 +82,25 @@ def generatePackets(g, n):
 
 
 
+def generateProbPackets(g, n):
+  res = []
+  nodes = g.nodes
+  nodes = list(nodes)
+  l = []
+  for i in range(n):
+    random.shuffle(nodes)
+    key = str(nodes[0])+'_'+str(nodes[1])
+    if key in l:
+      continue
+    else:
+      l.append(key)
+    if random.random()<0.9:
+      res.append([nodes[0], nodes[1], "word", str(random.random()/10)])
+    else:
+      res.append([nodes[0], nodes[1], "word", str(random.random()/10+0.9)])
+  return res
+
+
 if __name__=='__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("-si", type=str, default="./data/images/test.png")
@@ -89,6 +108,7 @@ if __name__=='__main__':
   parser.add_argument("-s", type=str)
   parser.add_argument("-n", type=int, default=6)
   parser.add_argument("-p", type=float, default=0.5)
+  parser.add_argument("-pr", type=int, default=0)
   args = parser.parse_args()
 
   if not os.path.exists(args.s):
@@ -106,11 +126,19 @@ if __name__=='__main__':
   routes = buildRouteTable(g)
   for node in routes:
     for dest in routes[node]:
-      f.write("route "+str(node+1)+" "+str(dest+1)+" "+str(routes[node][dest][0]+1)+"\n")
+      if args.pr==0:
+        f.write("route "+str(node+1)+" "+str(dest+1)+" "+str(routes[node][dest][0]+1)+"\n")
+      else:
+        p = random.random
 
-  packets = generatePackets(g, 1000)
-  for src, dst, word in packets:
-    f.write("packet "+str(src+1)+" "+str(src+1)+" "+str(dst+1)+" "+word+"\n")
+  if args.pr==0:
+    packets = generatePackets(g, 200)
+    for src, dst, word in packets:
+      f.write("packet "+str(src+1)+" "+str(src+1)+" "+str(dst+1)+" "+word+"\n")
+  else:
+    packets = generateProbPackets(g, 200)
+    for src, dst, word, prob in packets:
+      f.write("packet "+str(src+1)+" "+str(src+1)+" "+str(dst+1)+" "+word+" "+prob+"\n")
 
   f.close()
   
