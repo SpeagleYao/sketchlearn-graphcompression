@@ -9,8 +9,11 @@
 #include <unordered_map>
 #include <stdio.h>
 #include <stdlib.h>
+#include <map>
 #include <boost/algorithm/string.hpp>
 #include "multi-level-sketch.h"
+#include "Suff.h"
+#include "DNF.h"
 
 using namespace std;
 
@@ -129,6 +132,61 @@ string generateRandomHexString(int length) {
 }
 
 
+map<string, double> setProbs(string sd) {
+  // a map to store literal's name and probability
+  map<string, double> p;
+
+  //read trust data from files
+  ifstream fin(sd);
+  string line;
+  int i = 0;
+  while (getline(fin, line))
+  {
+    istringstream sin(line);
+    vector<string> fields;
+    string field;
+    while (getline(sin, field, ','))
+    {
+        fields.push_back(field);
+    }
+    if (fields[0] == "node1")
+    {
+        continue;
+    }
+    i++;
+    string name;
+    name.append("trust").append(fields[0]).append("-").append(fields[1]);
+    double prob = stod(fields[2]);
+    p[name] = prob;
+    //cout << name << " " << p[name] << endl;
+  }
+  cout << "total number of element: " << i << endl;
+
+  p["ra"] = 1.0;
+  p["rb"] = 1.0;
+  p["r0"] = 1.0;
+  p["r1"] = 1.0;
+  p["r2"] = 1.0;
+  p["r3"] = 1.0;
+  p["r4"] = 1.0;
+  p["r5"] = 1.0;
+  p["r6"] = 1.0;
+  return p;
+}
+
+
+string setProv(string sp) {
+    //read prov from files
+    ifstream pfin(sp);
+    stringstream buffer;
+    buffer << pfin.rdbuf();
+    string prov = buffer.str();
+    prov.erase(0,prov.find_first_not_of(" \t\r\n"));
+    prov.erase(prov.find_last_not_of(" \t\r\n") + 1);
+    return prov;
+}
+
+
 string buildProvenance(string& toQuery,
                       vector<string>& visited,
                       unordered_map<string, int>& provFreqs,
@@ -165,7 +223,8 @@ string buildProvenance(string& toQuery,
         }
       }
       if (tmp!="") {
-        tmp = rName+"@n257("+tmp+")";
+        // tmp = rName+"@n257("+tmp+")";
+        tmp = rName+"*("+tmp+")";
         if (res!="") {
           res += "+";
         }
@@ -209,17 +268,33 @@ int main(int argc, char* argv[]) {
   }
   for (int i=1; i<argc; i+=2) {
     assert(i+1<argc);
-    if (argvs[i]=="-k") {
-      args["k"] = argvs[i+1];
+    // row number of prov sketch table
+    if (argvs[i]=="-kp") {
+      args["kp"] = argvs[i+1];
     }
+    // row number of rule sketch table
+    else if (argvs[i]=="-kr") {
+      args["kr"] = argvs[i+1];
+    }
+    // column number of prov sketch table
     else if (argvs[i]=="-mp") {
       args["mp"] = argvs[i+1];
     }
+    // column number of rule sketch table
     else if (argvs[i]=="-mr") {
       args["mr"] = argvs[i+1];
     }
-    else if (argvs[i]=="-f") {
-      args["f"] = argvs[i+1];
+    // file name of sketch 
+    else if (argvs[i]=="-fs") {
+      args["fs"] = argvs[i+1];
+    }
+    // file name of probabilities
+    else if (argvs[i]=="-fd") {
+      args["fd"] = argvs[i+1];
+    }
+    // file name of provenance of queried tuple
+    else if (argvs[i]=="-fp") {
+      args["fp"] = argvs[i+1];
     }
     else if (argvs[i]=="-p") {
       args["p"] = argvs[i+1];
@@ -229,56 +304,101 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  if (args.find("f")!=args.end()) {
-    // pre-process of the data
-    unordered_map<string, int> provFreqs;
-    unordered_map<string, int> ruleFreqs;
-    unordered_map<string, string> idToContent; 
-    unordered_map<string, string> contentToId;
-    int flownumber = readFromFile_v2(args["f"], provFreqs, ruleFreqs, idToContent, contentToId);
+  // pre-process of the data
+  unordered_map<string, int> provFreqs;
+  unordered_map<string, int> ruleFreqs;
+  unordered_map<string, string> idToContent; 
+  unordered_map<string, string> contentToId;
+  int flownumber = readFromFile_v2(args["fs"], provFreqs, ruleFreqs, idToContent, contentToId);
+  map<string, double> probs = setProbs(args["fd"]);
 
-    int R = stoi(args["k"]);
-    int Cp = stoi(args["mp"]);
-    int Cr = stoi(args["mr"]);
-    int K = 320;
-    int shift = 0;
-
-    // for (auto it : idToContent) {
-    //   cout << it.first << ' ' << it.second << endl;
-    // }
-
-    vector<string> visited;
-    string prov = buildProvenance(args["q"], visited, provFreqs, ruleFreqs, idToContent, contentToId);
-    cout << prov << endl;
-
-    // extract prov table first
-    unordered_map<string, int> provs = feedAndExtract(R, Cp, K, shift, provFreqs);
-    int match = 0;
-    for (auto it : provFreqs) {
-      if (provs.find(it.first)!=provs.end()) {
-        match++;
-      }
-      else {
-        cout << "failed to extract: " << it.second << endl;
-      }
-    }
-    cout << "recall of prov: " << match*1.0/provFreqs.size() << endl;
-
-    unordered_map<string, int> rules = feedAndExtract(R, Cr, K, shift, ruleFreqs);
-    match = 0;
-    for (auto it : ruleFreqs) {
-      if (rules.find(it.first)!=rules.end()) {
-        match++;
-      }
-      else {
-        // cout << "failed to extract: " << it.second << endl;
-      }
-    }
-    cout << "recall of prov: " << match*1.0/ruleFreqs.size() << endl;
-
-    string prunedProv = buildProvenance(args["q"], visited, provs, rules, idToContent, contentToId);
-    cout << prunedProv << endl;
+  int Rp, Rr, Cp, Cr;
+  if (args.find("p")!=args.end()) {
+    Rp = 3;
+    Rr = 3;
+    Cp = provFreqs.size()*stod(args["p"])/Rp;
+    Cr = ruleFreqs.size()*stod(args["p"])/Rr;
   }
+  else {
+    Rp = stoi(args["kp"]);
+    Rr = stoi(args["kr"]);
+    Cp = stoi(args["mp"]);
+    Cr = stoi(args["mr"]);
+  }
+  int K = 320;
+  int shift = 0;
+  double error = 0.01;
+
+  // cout << "compression ratio: " << (Rp*Cp+Rr*Cr)*1.0/(provFreqs.size()+ruleFreqs.size()) << endl;
+  cout << "prov sketch table compression ratio: " << (Rp*Cp)*1.0/(provFreqs.size()) << endl;
+
+  vector<string> visited;
+  string prov;
+  if (args.find("fp")!=args.end()) {
+    prov = setProv(args["fp"]);
+  }
+  else {
+    prov = buildProvenance(args["q"], visited, provFreqs, ruleFreqs, idToContent, contentToId);
+  }
+  // cout << prov << endl;
+  clock_t t = clock();
+  DNF original(prov, probs);
+  Suff suff1(original.getLambda(), error);
+  cout << "Sufficient lineage time: " << (clock()-t)*1.0/CLOCKS_PER_SEC << endl;
+  vector<map<string, double>> OrigDNF = suff1.getOrigDNF();
+  int OrigTerms = 0;
+  for (auto it : OrigDNF) {
+    OrigTerms += it.size();
+  }
+  cout << "number of terms: " << OrigTerms << endl;
+  double OrigProb = suff1.getOrigProb();
+  cout << "Original Probability = " << OrigProb << endl;
+  cout << endl;
+
+  clock_t t1 = clock();
+  // extract prov table first
+  unordered_map<string, int> provs = feedAndExtract(Rp, Cp, K, shift, provFreqs);
+  int match = 0;
+  for (auto it : provFreqs) {
+    if (provs.find(it.first)!=provs.end()) {
+      match++;
+    }
+    else {
+      // cout << "failed to extract: " << it.second << endl;
+    }
+  }
+  cout << "recall of provs: " << match*1.0/provFreqs.size() << endl;
+
+  unordered_map<string, int> rules = feedAndExtract(Rr, Cr, K, shift, ruleFreqs);
+  match = 0;
+  for (auto it : ruleFreqs) {
+    if (rules.find(it.first)!=rules.end()) {
+      match++;
+    }
+    else {
+      // cout << "failed to extract: " << it.second << endl;
+    }
+  }
+  cout << "recall of rules: " << match*1.0/ruleFreqs.size() << endl;
+  clock_t t2 = clock();
+  cout << "sketch extraction time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << endl;
+  cout << endl;
+
+  string prunedProv = buildProvenance(args["q"], visited, provs, rules, idToContent, contentToId);
+  // cout << prunedProv << endl;
+  DNF pruned(prunedProv, probs);
+  Suff suff2(pruned.getLambda(), error);
+  vector<map<string, double>> PruneDNF = suff2.getOrigDNF();
+  int PruneTerms = 0;
+  for (auto it : PruneDNF) {
+    PruneTerms += it.size();
+  }
+  double PruneProb = suff2.getOrigProb();
+  cout << "Pruned Probability = " << PruneProb << endl;
+
+  cout << "delta: " << abs(OrigProb-PruneProb) << endl;
+  cout << "ratio of pruned terms: " << abs(PruneTerms-OrigTerms)*1.0/OrigTerms << endl;
+  cout << endl;
 
 }
 

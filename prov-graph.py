@@ -324,7 +324,8 @@ def checkRedundancy(s):
   return False
 
 if __name__ == '__main__':
-  name = "mutualTrustPath1-2_10_new_100_prune"
+  name = "mutualTrustPath1-2_10_new_100_prune_or_3"
+  # name = "prov-sample-100-hop3"
   drawGraph('./data/trust/'+name+'.txt', './data/trust/'+name+'.png', trustDic)
   '''
   G = pgv.AGraph(strict=True, directed=True)

@@ -449,7 +449,7 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
       count++;
     }
   }
-  if (count>10) {
+  if (count>=10) {
     return false;
   }
   // for (int ele : temp) {
@@ -558,7 +558,7 @@ bool MultiLevelSketch::extractLargeFlows(double theta, int r, int c, vector<vect
       count++;
     }
   }
-  if (count>10||sketch[r][c][0]==0) {
+  if (count>=6||sketch[r][c][0]==0) {
     return false;
   }
   // enumerate all flow keys which match the template
@@ -872,12 +872,12 @@ bool MultiLevelSketch::terminate() {
   double r1 = 1.0*lessOne/denominator;
   double r2 = 1.0*lessTwo/denominator;
   double r3 = 1.0*lessThree/denominator;
-  if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
-    return true;
-  }
-  // if (r1>1 && r2>1 && r3>1) {
+  // if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
   //   return true;
   // }
+  if (r1>1 && r2>1 && r3>1) {
+    return true;
+  }
   return false;
 }
 

@@ -141,7 +141,56 @@ def drawHistGraph(file_name):
 
 
 
+def drawScatterGraphs(file_name):
+  f = open(file_name, 'r')
+  ratios = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+  c_ratios = []
+  suff_times = []
+  sketch_times = []
+  deltas = []
+  terms = []
+
+  for line in f.readlines():
+    splits = line.strip().split(' ');
+    if len(splits)==1 and splits[0]!='':
+      c_ratios.append(float(splits[0]))
+    elif line.startswith("Sufficient lineage time"):
+      suff_times.append(float(splits[-1]))
+    elif line.startswith("sketch extraction time"):
+      sketch_times.append(float(splits[-1]))
+    elif line.startswith("delta"):
+      deltas.append(float(splits[-1]))
+    elif line.startswith("ratio of pruned terms"):
+      terms.append(float(splits[-1]))
+
+  # print(c_ratios)
+  # print(suff_times)
+
+  fig, ax = plt.subplots()
+  ax.scatter(c_ratios, suff_times, marker='o', color='blue', label="suff time", alpha=0.5)
+  ax.scatter(c_ratios, sketch_times, marker='^', color='red', label="sketch time", alpha=0.5)
+  ax.set_xlabel("compression ratio")
+  ax.set_ylabel("time")
+  ax.legend()
+  plt.show()
+
+  fig, ax = plt.subplots()
+  ax.scatter(c_ratios, deltas, marker='^', color='red', alpha=0.5)
+  ax.set_xlabel("compression ratio")
+  ax.set_ylabel("deltas")
+  plt.show()
+
+  fig, ax = plt.subplots()
+  ax.scatter(c_ratios, terms, marker='^', color='red', alpha=0.5)
+  ax.set_xlabel("compression ratio")
+  ax.set_ylabel("ratio of pruned literals")
+  plt.show()
+
+
+
 if __name__=='__main__':
   # drawHistGraph("./data/testp1/testp20.prov")
-  drawHistGraph("./data/trust_30/trustp_30_20.prov")
+  # drawHistGraph("./data/trust_30/trustp_30_20.prov")
   # test8k3()
+  drawScatterGraphs("./data/sample10_new_10rounds/sample10_new_10rounds_mutualtrust1-2.log")

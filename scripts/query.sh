@@ -1,8 +1,13 @@
-for k in 2 3 4 5 6 7 8 9 10
+LOG_FILE="./data/sample10_new_10rounds/sample10_new_10rounds_mutualtrust1-2.log"
+SKETCH_FILE="./data/sample10_new_10rounds/sample_10_new_10rounds.prov"
+PROB_FILE="./data/sample10_new_10rounds/sample_10_new.csv"
+PROV_FILE="./data/sample10_new_10rounds/mutualtrust1-2.txt"
+rm $LOG_FILE
+for p in 0.6 0.7 0.8 0.9 1.0
 do 
-  for m in 10, 30, 50, 70, 90, 110, 130, 150, 170, 200
+  for (( c=1; c<=10; c++ ))
   do
-    echo $k $m
-    ./build/main -k $k -f data/test2/test.prov -m $m
+    echo $p >> $LOG_FILE
+    ./build/main -fs $SKETCH_FILE -fd $PROB_FILE -fp $PROV_FILE -q mutualTrustPath1-2 -p $p >> $LOG_FILE
   done
 done
