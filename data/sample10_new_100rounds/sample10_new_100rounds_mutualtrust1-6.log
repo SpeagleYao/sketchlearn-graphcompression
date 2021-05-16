@@ -1,0 +1,1602 @@
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.416787 seconds
+Sufficient lineage time: 0.574639
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.389091
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.367742
+sketch extraction time: 3.07657
+
+MC time: 0.000886 seconds
+Pruned Probability = 0
+delta: 0.8377
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.418335 seconds
+Sufficient lineage time: 0.606602
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.149091
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.580645
+sketch extraction time: 2.66665
+
+MC time: 0.000889 seconds
+Pruned Probability = 0
+delta: 0.835
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.414916 seconds
+Sufficient lineage time: 0.55482
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.381818
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.44086
+sketch extraction time: 3.72912
+
+MC time: 0.00088 seconds
+Pruned Probability = 0
+delta: 0.8256
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.412422 seconds
+Sufficient lineage time: 0.565244
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.214545
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.283871
+sketch extraction time: 1.49234
+
+MC time: 0.000882 seconds
+Pruned Probability = 0
+delta: 0.8318
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.42027 seconds
+Sufficient lineage time: 0.577571
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.174545
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.156989
+sketch extraction time: 0.701177
+
+MC time: 0.000882 seconds
+Pruned Probability = 0
+delta: 0.8313
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.414451 seconds
+Sufficient lineage time: 0.55371
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.174545
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.643011
+sketch extraction time: 40.1898
+
+MC time: 0.000883 seconds
+Pruned Probability = 0
+delta: 0.8241
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.445362 seconds
+Sufficient lineage time: 0.600543
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.229091
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.270968
+sketch extraction time: 25.5922
+
+MC time: 0.001218 seconds
+Pruned Probability = 0
+delta: 0.8241
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.5299 seconds
+Sufficient lineage time: 0.70552
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.236364
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.236559
+sketch extraction time: 1.03592
+
+MC time: 0.000923 seconds
+Pruned Probability = 0
+delta: 0.8295
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.487319 seconds
+Sufficient lineage time: 0.648709
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.243636
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.593548
+sketch extraction time: 3.68156
+
+MC time: 0.000919 seconds
+Pruned Probability = 0
+delta: 0.8237
+ratio of pruned terms: 1
+
+0.4
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.392727
+MC time: 0.431165 seconds
+Sufficient lineage time: 0.588848
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 275
+recall of provs: 0.207273
+total frequence: 15487, threshold to be large flow: 249
+recall of rules: 0.225806
+sketch extraction time: 1.07051
+
+MC time: 0.000886 seconds
+Pruned Probability = 0
+delta: 0.8272
+ratio of pruned terms: 1
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.425565 seconds
+Sufficient lineage time: 0.588564
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.989091
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.991398
+sketch extraction time: 4.83992
+
+MC time: 0.415515 seconds
+Pruned Probability = 0.8374
+delta: 0.0077
+ratio of pruned terms: 0.0588235
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.434087 seconds
+Sufficient lineage time: 0.582494
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.581818
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.713978
+sketch extraction time: 2.25879
+
+MC time: 0.280904 seconds
+Pruned Probability = 0.8407
+delta: 0.0119
+ratio of pruned terms: 0.397059
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.47082 seconds
+Sufficient lineage time: 0.787447
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.992727
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.574194
+sketch extraction time: 4.15283
+
+MC time: 0.037385 seconds
+Pruned Probability = 0.8903
+delta: 0.0551
+ratio of pruned terms: 0.794118
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.428195 seconds
+Sufficient lineage time: 0.589812
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.941818
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.673118
+sketch extraction time: 31.4071
+
+MC time: 0.294873 seconds
+Pruned Probability = 0.897
+delta: 0.0628
+ratio of pruned terms: 0.397059
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.427105 seconds
+Sufficient lineage time: 0.583807
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.632727
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.987097
+sketch extraction time: 4.08775
+
+MC time: 0.062898 seconds
+Pruned Probability = 0.8236
+delta: 0.0098
+ratio of pruned terms: 0.867647
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.43037 seconds
+Sufficient lineage time: 0.588825
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.694624
+sketch extraction time: 5.13492
+
+MC time: 0.215681 seconds
+Pruned Probability = 0.9881
+delta: 0.1589
+ratio of pruned terms: 0.0588235
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.430285 seconds
+Sufficient lineage time: 0.576353
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.574545
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.737634
+sketch extraction time: 2.00701
+
+MC time: 0.092669 seconds
+Pruned Probability = 0.824
+delta: 0.0014
+ratio of pruned terms: 0.823529
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.432874 seconds
+Sufficient lineage time: 0.591143
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.84
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.604301
+sketch extraction time: 3.92304
+
+MC time: 0.195169 seconds
+Pruned Probability = 0.9123
+delta: 0.0854
+ratio of pruned terms: 0.470588
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.427435 seconds
+Sufficient lineage time: 0.588168
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.945455
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.782796
+sketch extraction time: 4.27889
+
+MC time: 0.413875 seconds
+Pruned Probability = 0.8326
+delta: 0.0059
+ratio of pruned terms: 0.0588235
+
+0.5
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.490909
+MC time: 0.421082 seconds
+Sufficient lineage time: 0.577924
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 220
+recall of provs: 0.654545
+total frequence: 15487, threshold to be large flow: 201
+recall of rules: 0.675269
+sketch extraction time: 3.27958
+
+MC time: 0.05584 seconds
+Pruned Probability = 0.91
+delta: 0.0825
+ratio of pruned terms: 0.470588
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.42413 seconds
+Sufficient lineage time: 0.583973
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.84
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.627957
+sketch extraction time: 1.80372
+
+MC time: 0.088631 seconds
+Pruned Probability = 0.9034
+delta: 0.0736
+ratio of pruned terms: 0.411765
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.444837 seconds
+Sufficient lineage time: 0.640292
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.709091
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.625806
+sketch extraction time: 4.95633
+
+MC time: 0.042026 seconds
+Pruned Probability = 0.8999
+delta: 0.0684
+ratio of pruned terms: 0.735294
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.430449 seconds
+Sufficient lineage time: 0.5913
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.712727
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.849462
+sketch extraction time: 3.99204
+
+MC time: 0.078301 seconds
+Pruned Probability = 0.8276
+delta: 0.001
+ratio of pruned terms: 0.852941
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.430024 seconds
+Sufficient lineage time: 0.577481
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.843636
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.735484
+sketch extraction time: 2.81869
+
+MC time: 0.098967 seconds
+Pruned Probability = 0.8173
+delta: 0.0083
+ratio of pruned terms: 0.808824
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.434107 seconds
+Sufficient lineage time: 0.592909
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.661818
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.987097
+sketch extraction time: 3.72608
+
+MC time: 0.031901 seconds
+Pruned Probability = 0.8916
+delta: 0.0646
+ratio of pruned terms: 0.838235
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.429612 seconds
+Sufficient lineage time: 0.577287
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.690909
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.991398
+sketch extraction time: 3.76137
+
+MC time: 0.097827 seconds
+Pruned Probability = 0.8193
+delta: 0.0063
+ratio of pruned terms: 0.808824
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.461621 seconds
+Sufficient lineage time: 0.618308
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.774545
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.991398
+sketch extraction time: 4.4659
+
+MC time: 0.317585 seconds
+Pruned Probability = 0.8225
+delta: 0.0017
+ratio of pruned terms: 0.25
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.434451 seconds
+Sufficient lineage time: 0.595021
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.995699
+sketch extraction time: 4.06787
+
+MC time: 0.434253 seconds
+Pruned Probability = 0.8215
+delta: 0.0105
+ratio of pruned terms: 0
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.428969 seconds
+Sufficient lineage time: 0.746448
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.690909
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.997849
+sketch extraction time: 4.42355
+
+MC time: 0.328145 seconds
+Pruned Probability = 0.832
+delta: 0.0032
+ratio of pruned terms: 0.25
+
+0.52
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.512727
+MC time: 0.426821 seconds
+Sufficient lineage time: 0.585374
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 211
+recall of provs: 0.818182
+total frequence: 15487, threshold to be large flow: 193
+recall of rules: 0.716129
+sketch extraction time: 2.22473
+
+MC time: 0.163195 seconds
+Pruned Probability = 0.8336
+delta: 0.0018
+ratio of pruned terms: 0.647059
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.43012 seconds
+Sufficient lineage time: 0.583342
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.996364
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.916129
+sketch extraction time: 4.52384
+
+MC time: 0.526826 seconds
+Pruned Probability = 0.8506
+delta: 0.019
+ratio of pruned terms: 0.161765
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.430733 seconds
+Sufficient lineage time: 0.576076
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.963636
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.954839
+sketch extraction time: 5.79383
+
+MC time: 0.423342 seconds
+Pruned Probability = 0.8328
+delta: 0.0057
+ratio of pruned terms: 0
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.431397 seconds
+Sufficient lineage time: 0.748156
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.956364
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.913978
+sketch extraction time: 2.68944
+
+MC time: 0.408858 seconds
+Pruned Probability = 0.837
+delta: 0.0002
+ratio of pruned terms: 0.0588235
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.427793 seconds
+Sufficient lineage time: 0.572781
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.939785
+sketch extraction time: 3.52707
+
+MC time: 0.424977 seconds
+Pruned Probability = 0.8415
+delta: 0.0124
+ratio of pruned terms: 0.0735294
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.429365 seconds
+Sufficient lineage time: 0.724222
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.832258
+sketch extraction time: 4.38548
+
+MC time: 0.385131 seconds
+Pruned Probability = 0.8317
+delta: 0.0009
+ratio of pruned terms: 0.117647
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.430005 seconds
+Sufficient lineage time: 0.589628
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.930909
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 1
+sketch extraction time: 2.89775
+
+MC time: 0.329242 seconds
+Pruned Probability = 0.8255
+delta: 0.001
+ratio of pruned terms: 0.25
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.455141 seconds
+Sufficient lineage time: 0.606938
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.883636
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.789247
+sketch extraction time: 5.22584
+
+MC time: 0.130304 seconds
+Pruned Probability = 0.9
+delta: 0.0751
+ratio of pruned terms: 0.220588
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.428712 seconds
+Sufficient lineage time: 0.792673
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.985455
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.946237
+sketch extraction time: 5.3841
+
+MC time: 0.357801 seconds
+Pruned Probability = 0.8282
+delta: 0.0117
+ratio of pruned terms: 0.25
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.446237 seconds
+Sufficient lineage time: 0.599807
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 0.847273
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.995699
+sketch extraction time: 3.96326
+
+MC time: 0.329104 seconds
+Pruned Probability = 0.8287
+delta: 0.0066
+ratio of pruned terms: 0.25
+
+0.55
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.545455
+MC time: 0.431749 seconds
+Sufficient lineage time: 0.579145
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 198
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 182
+recall of rules: 0.877419
+sketch extraction time: 2.4408
+
+MC time: 0.43112 seconds
+Pruned Probability = 0.8247
+delta: 0.0015
+ratio of pruned terms: 0
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.432372 seconds
+Sufficient lineage time: 0.580158
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.883871
+sketch extraction time: 2.9831
+
+MC time: 0.328599 seconds
+Pruned Probability = 0.8269
+delta: 0.0045
+ratio of pruned terms: 0.25
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.421541 seconds
+Sufficient lineage time: 0.742659
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.949091
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.929032
+sketch extraction time: 4.57266
+
+MC time: 0.329239 seconds
+Pruned Probability = 0.8254
+delta: 0.0103
+ratio of pruned terms: 0.25
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.429111 seconds
+Sufficient lineage time: 0.575894
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.923636
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.995699
+sketch extraction time: 3.99009
+
+MC time: 0.323046 seconds
+Pruned Probability = 0.8265
+delta: 0.0019
+ratio of pruned terms: 0.25
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.427063 seconds
+Sufficient lineage time: 0.65249
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.850909
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.937634
+sketch extraction time: 2.56871
+
+MC time: 0.271456 seconds
+Pruned Probability = 0.8382
+delta: 0.0019
+ratio of pruned terms: 0.338235
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.429705 seconds
+Sufficient lineage time: 0.574321
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.872727
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.997849
+sketch extraction time: 3.89757
+
+MC time: 0.325652 seconds
+Pruned Probability = 0.8288
+delta: 0.0016
+ratio of pruned terms: 0.25
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.437449 seconds
+Sufficient lineage time: 0.594344
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.869091
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.993548
+sketch extraction time: 4.05559
+
+MC time: 0.425479 seconds
+Pruned Probability = 0.8282
+delta: 0.001
+ratio of pruned terms: 0
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.432937 seconds
+Sufficient lineage time: 0.594168
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.872727
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.995699
+sketch extraction time: 3.88772
+
+MC time: 0.433378 seconds
+Pruned Probability = 0.8274
+delta: 0.0028
+ratio of pruned terms: 0
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.430126 seconds
+Sufficient lineage time: 0.613377
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.941818
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.898925
+sketch extraction time: 2.69942
+
+MC time: 0.641344 seconds
+Pruned Probability = 0.8487
+delta: 0.0146
+ratio of pruned terms: 0.735294
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.430844 seconds
+Sufficient lineage time: 0.58879
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 0.916364
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.989247
+sketch extraction time: 4.04894
+
+MC time: 0.326662 seconds
+Pruned Probability = 0.8181
+delta: 0.0114
+ratio of pruned terms: 0.25
+
+0.57
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.567273
+MC time: 0.431491 seconds
+Sufficient lineage time: 0.827364
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 190
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 175
+recall of rules: 0.946237
+sketch extraction time: 3.23337
+
+MC time: 0.419763 seconds
+Pruned Probability = 0.83
+delta: 0.0084
+ratio of pruned terms: 0.0588235
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.431362 seconds
+Sufficient lineage time: 0.591239
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 3.00311
+
+MC time: 0.429784 seconds
+Pruned Probability = 0.8314
+delta: 0.0013
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.437185 seconds
+Sufficient lineage time: 0.601811
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 2.83325
+
+MC time: 0.426431 seconds
+Pruned Probability = 0.8282
+delta: 0.0032
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.430295 seconds
+Sufficient lineage time: 0.635588
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 3.21538
+
+MC time: 0.427945 seconds
+Pruned Probability = 0.8267
+delta: 0.0087
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.423614 seconds
+Sufficient lineage time: 0.620081
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 0.987097
+sketch extraction time: 5.53666
+
+MC time: 0.426861 seconds
+Pruned Probability = 0.8251
+delta: 0.0077
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.431104 seconds
+Sufficient lineage time: 0.589988
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 0.989091
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 3.93669
+
+MC time: 0.327079 seconds
+Pruned Probability = 0.8269
+delta: 0.0032
+ratio of pruned terms: 0.25
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.429174 seconds
+Sufficient lineage time: 0.615904
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 3.39134
+
+MC time: 0.430179 seconds
+Pruned Probability = 0.8303
+delta: 0.0003
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.428422 seconds
+Sufficient lineage time: 0.57517
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 3.47803
+
+MC time: 0.42341 seconds
+Pruned Probability = 0.832
+delta: 0.0077
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.430008 seconds
+Sufficient lineage time: 0.60578
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 5.558
+
+MC time: 0.446381 seconds
+Pruned Probability = 0.8272
+delta: 0.0058
+ratio of pruned terms: 0
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.429909 seconds
+Sufficient lineage time: 0.58858
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 0.992727
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 5.2318
+
+MC time: 0.738552 seconds
+Pruned Probability = 0.9005
+delta: 0.0712
+ratio of pruned terms: 0.176471
+
+0.6
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.6
+MC time: 0.564622 seconds
+Sufficient lineage time: 0.766601
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 180
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 166
+recall of rules: 1
+sketch extraction time: 4.14027
+
+MC time: 0.531923 seconds
+Pruned Probability = 0.8278
+delta: 0.0033
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.522487 seconds
+Sufficient lineage time: 0.708789
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.55716
+
+MC time: 0.608763 seconds
+Pruned Probability = 0.8244
+delta: 0.0009
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.591892 seconds
+Sufficient lineage time: 0.805251
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.92669
+
+MC time: 0.608855 seconds
+Pruned Probability = 0.8302
+delta: 0.0046
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.593937 seconds
+Not found! 
+Sufficient lineage time: 0.761055
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 0.996364
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 4.02628
+
+MC time: 0.563566 seconds
+Pruned Probability = 0.8244
+delta: 0.0069
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.615626 seconds
+Sufficient lineage time: 0.903292
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.8182
+
+MC time: 0.601281 seconds
+Pruned Probability = 0.8258
+delta: 0.0057
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.580235 seconds
+Sufficient lineage time: 0.768857
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.44006
+
+MC time: 0.455763 seconds
+Pruned Probability = 0.8284
+delta: 0.0004
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.437791 seconds
+Sufficient lineage time: 0.584701
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 1.83818
+
+MC time: 0.445352 seconds
+Pruned Probability = 0.8286
+delta: 0.0013
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.450847 seconds
+Sufficient lineage time: 0.614155
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.13911
+
+MC time: 0.481339 seconds
+Not found! 
+Pruned Probability = 0.8326
+delta: 0.0014
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.468721 seconds
+Sufficient lineage time: 0.656079
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.62078
+
+MC time: 0.542693 seconds
+Pruned Probability = 0.8239
+delta: 0.0009
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.521725 seconds
+Sufficient lineage time: 0.710578
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 0.997849
+sketch extraction time: 4.30263
+
+MC time: 0.452822 seconds
+Pruned Probability = 0.826
+delta: 0.0058
+ratio of pruned terms: 0
+
+0.7
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.698182
+MC time: 0.453266 seconds
+Sufficient lineage time: 0.607824
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 155
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 143
+recall of rules: 1
+sketch extraction time: 2.40988
+
+MC time: 0.523186 seconds
+Pruned Probability = 0.8316
+delta: 0.0037
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.507915 seconds
+Sufficient lineage time: 0.705705
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 1.97515
+
+MC time: 0.51035 seconds
+Pruned Probability = 0.8248
+delta: 0.0002
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.477065 seconds
+Sufficient lineage time: 0.652983
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 1.80292
+
+MC time: 0.503521 seconds
+Pruned Probability = 0.8331
+delta: 0.0015
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.521057 seconds
+Sufficient lineage time: 0.694941
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 1.96774
+
+MC time: 0.608866 seconds
+Pruned Probability = 0.8338
+delta: 0.0035
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.634141 seconds
+Sufficient lineage time: 0.851122
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.37003
+
+MC time: 0.626761 seconds
+Pruned Probability = 0.8323
+delta: 0.0031
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.627182 seconds
+Sufficient lineage time: 0.837072
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.50567
+
+MC time: 0.587234 seconds
+Pruned Probability = 0.8258
+delta: 0.0037
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.597824 seconds
+Sufficient lineage time: 0.800339
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 0.996364
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 4.08486
+
+MC time: 0.477637 seconds
+Pruned Probability = 0.823
+delta: 0.0078
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.499589 seconds
+Sufficient lineage time: 0.675203
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.17084
+
+MC time: 0.562286 seconds
+Pruned Probability = 0.8256
+delta: 0.0024
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.591343 seconds
+Sufficient lineage time: 0.821902
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.27745
+
+MC time: 0.587118 seconds
+Pruned Probability = 0.8286
+delta: 0.0006
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.539113 seconds
+Sufficient lineage time: 0.798018
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.02483
+
+MC time: 0.549213 seconds
+Pruned Probability = 0.8343
+delta: 0.0008
+ratio of pruned terms: 0
+
+0.8
+program start
+reading from file ./data/sample10/sample_10_new_100rounds.prov
+total number of element: 27
+prov sketch table compression ratio: 0.796364
+MC time: 0.533134 seconds
+Sufficient lineage time: 0.711968
+number of terms: 68
+
+total frequence: 9924, threshold to be large flow: 135
+recall of provs: 1
+total frequence: 15487, threshold to be large flow: 124
+recall of rules: 1
+sketch extraction time: 2.38154
+
+MC time: 0.550934 seconds
+Pruned Probability = 0.8227
+delta: 0.0082
+ratio of pruned terms: 0
+

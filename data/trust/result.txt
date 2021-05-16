@@ -1,0 +1,111 @@
+whole:
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[3] trust1-4 trust2-4 trust4-1 trust4-2 MonoProb = 0.08
+[4] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+[5] trust1-7 trust2-4 trust4-1 trust4-2 trust7-4 MonoProb = 0.0532
+[6] trust1-2 trust2-4 trust4-6 trust6-1 MonoProb = 0.0081
+[7] trust1-4 trust2-4 trust4-2 trust4-6 trust6-1 MonoProb = 0.0072
+[8] trust1-6 trust2-1 trust4-2 trust6-4 MonoProb = 0.0072
+[9] trust1-6 trust2-4 trust4-1 trust4-2 trust6-4 MonoProb = 0.0072
+[10] trust1-7 trust2-4 trust4-2 trust4-6 trust6-1 trust7-4 MonoProb = 0.004788
+[11] trust1-6 trust2-4 trust4-2 trust4-6 trust6-1 trust6-4 MonoProb = 0.000648
+[12] trust1-2 trust2-4 trust4-6 trust5-1 trust6-5 MonoProb = 9e-05
+[13] trust1-4 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 MonoProb = 8e-05
+[14] trust1-7 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 trust7-4 MonoProb = 5.32e-05
+[15] trust1-6 trust2-4 trust4-2 trust4-6 trust5-1 trust6-4 trust6-5 MonoProb = 7.2e-06
+prob: 0.1891
+
+
+sufficient lineage:
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[3] trust1-4 trust2-4 trust4-1 trust4-2 MonoProb = 0.08
+[4] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+[5] trust1-7 trust2-4 trust4-1 trust4-2 trust7-4 MonoProb = 0.0532
+[6] trust1-2 trust2-4 trust4-6 trust6-1 MonoProb = 0.0081
+[7] trust1-4 trust2-4 trust4-2 trust4-6 trust6-1 MonoProb = 0.0072
+[8] trust1-6 trust2-1 trust4-2 trust6-4 MonoProb = 0.0072
+[9] trust1-6 trust2-4 trust4-1 trust4-2 trust6-4 MonoProb = 0.0072
+[10] trust1-7 trust2-4 trust4-2 trust4-6 trust6-1 trust7-4 MonoProb = 0.004788
+[11] trust1-6 trust2-4 trust4-2 trust4-6 trust6-1 trust6-4 MonoProb = 0.000648
+[12] trust1-2 trust2-4 trust4-6 trust5-1 trust6-5 MonoProb = 9e-05
+[13] trust1-4 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 MonoProb = 8e-05
+[14] trust1-7 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 trust7-4 MonoProb = 5.32e-05
+prob: 0.1852
+
+or
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+prob: 0.1828
+
+or
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[3] trust1-4 trust2-4 trust4-1 trust4-2 MonoProb = 0.08
+[4] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+[5] trust1-7 trust2-4 trust4-1 trust4-2 trust7-4 MonoProb = 0.0532
+[6] trust1-2 trust2-4 trust4-6 trust6-1 MonoProb = 0.0081
+[7] trust1-4 trust2-4 trust4-2 trust4-6 trust6-1 MonoProb = 0.0072
+[8] trust1-6 trust2-1 trust4-2 trust6-4 MonoProb = 0.0072
+[9] trust1-6 trust2-4 trust4-1 trust4-2 trust6-4 MonoProb = 0.0072
+[10] trust1-7 trust2-4 trust4-2 trust4-6 trust6-1 trust7-4 MonoProb = 0.004788
+[11] trust1-6 trust2-4 trust4-2 trust4-6 trust6-1 trust6-4 MonoProb = 0.000648
+prob: 0.1869
+
+
+
+
+whole:
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[3] trust1-4 trust2-4 trust4-1 trust4-2 MonoProb = 0.08
+[4] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+[5] trust1-7 trust2-4 trust4-1 trust4-2 trust7-4 MonoProb = 0.0532
+[6] trust1-2 trust2-4 trust4-6 trust6-1 MonoProb = 0.0081
+[7] trust1-4 trust2-4 trust4-2 trust4-6 trust6-1 MonoProb = 0.0072
+[8] trust1-6 trust2-1 trust4-2 trust6-4 MonoProb = 0.0072
+[9] trust1-6 trust2-4 trust4-1 trust4-2 trust6-4 MonoProb = 0.0072
+[10] trust1-7 trust2-4 trust4-2 trust4-6 trust6-1 trust7-4 MonoProb = 0.004788
+[11] trust1-6 trust2-4 trust4-2 trust4-6 trust6-1 trust6-4 MonoProb = 0.000648
+[12] trust1-2 trust2-4 trust4-6 trust5-1 trust6-5 MonoProb = 9e-05
+[13] trust1-4 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 MonoProb = 8e-05
+[14] trust1-7 trust2-4 trust4-2 trust4-6 trust5-1 trust6-5 trust7-4 MonoProb = 5.32e-05
+[15] trust1-6 trust2-4 trust4-2 trust4-6 trust5-1 trust6-4 trust6-5 MonoProb = 7.2e-06
+prob: 0.1891
+
+
+sketch:
+[0] trust1-2 MonoProb = 0.9
+[1] trust1-4 trust4-2 MonoProb = 0.8
+[2] trust1-7 trust4-2 trust7-4 MonoProb = 0.532
+prob: 0.9802
+
+or
+[0] trust1-2 trust2-1 MonoProb = 0.09
+[1] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[2] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+prob: 0.0959
+
+or 
+[0] trust1-2 trust2-4 trust4-1 MonoProb = 0.09
+[1] trust1-2 trust2-1 MonoProb = 0.09
+[2] trust1-4 trust2-1 trust4-2 MonoProb = 0.08
+[3] trust1-4 trust2-4 trust4-1 trust4-2 MonoProb = 0.08
+[4] trust1-7 trust2-1 trust4-2 trust7-4 MonoProb = 0.0532
+[5] trust1-7 trust2-4 trust4-1 trust4-2 trust7-4 MonoProb = 0.0532
+[6] trust1-2 trust2-4 trust4-6 trust6-1 MonoProb = 0.0081
+[7] trust1-4 trust2-4 trust4-2 trust4-6 trust6-1 MonoProb = 0.0072
+[8] trust1-6 trust2-1 trust4-2 trust6-4 MonoProb = 0.0072
+[9] trust1-6 trust2-4 trust4-1 trust4-2 trust6-4 MonoProb = 0.0072
+[10] trust1-7 trust2-4 trust4-2 trust4-6 trust6-1 trust7-4 MonoProb = 0.004788
+[11] trust1-6 trust2-4 trust4-2 trust4-6 trust6-1 trust6-4 MonoProb = 0.000648
+prob: 0.1892
+
+
+compression ratio, time, delta=diff(prob), # of terms/literals

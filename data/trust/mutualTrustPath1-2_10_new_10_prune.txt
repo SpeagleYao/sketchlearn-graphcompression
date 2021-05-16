@@ -1,0 +1,1 @@
+(r3@n257((ra@n257((r2@n257(trust1-7)+r2@n257(trust1-4*(r2@n257(trust4-6)))+r2@n257(trust1-6)+r1@n257(trust1-2))))))
