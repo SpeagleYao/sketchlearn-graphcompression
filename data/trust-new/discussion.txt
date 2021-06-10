@@ -1,0 +1,32 @@
+new method: 
+1. monte corlo like method to build sketch table for provenance maintenance
+2. extract pruned provenance tree (in tables) from the sketch table
+3. provenance query from extracted pruned provenance tree
+
+previous method:
+1. provenance maintenance
+2. provenance query
+3. sufficient lineage -> prune
+
+experiments:
+1. maintenance time (previous_method   --VS--   monte_corlo_like_method)  t1  n rounds t2    t2 < n*t1
+2. query time (original_provenance_query   --VS--   build_provenance_from_extracted_sketch)
+3. prune time (sufficient_lieage   --VS--   sketch_extraction)  
+4. performance of prune 
+4.1 find best compression ratio (compression_ratio = (original_storage-sketch_size)/original_storage) time, delta, prune ratio
+4.2 delta and prune ratio (sufficient_lieage VS sketch)
+
+
+sha(rule_name+rule_body_tuples)
+sha(rule_name) + sha(rule_body_tuple1) + ...
+20bits + 20bits + 000*
+
+trust(1,2) -> sha() 
+
+1. 保存中间provenance table (maintenance time)
+2. multiple time sketch extraction (prune performance)
+3. normal samples
+
+reviewer comments
+
+sample strategy

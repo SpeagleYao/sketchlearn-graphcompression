@@ -109,3 +109,21 @@ prob: 0.1892
 
 
 compression ratio, time, delta=diff(prob), # of terms/literals
+
+ratio of pruned literals of suff lineage
+sketch time bar graph
+sufficient lineage avg time
+
+pruned literals x delta
+compression ratio change
+
+
+
+
+experiments:
+1. maintenance time (orignal_method   --VS--   monte_corlo_like_method)
+2. query time (original_provenance_query   --VS--   build_provenance_from_extracted_sketch)
+3. prune time (sufficient_lieage   --VS--   sketch_extraction)  
+4. performance of prune 
+4.1 find best compression ratio (compression_ratio = (original_storage-sketch_size)/original_storage)
+4.2 delta and ratio_of_pruned_terms (sufficient_lieage VS sketch)

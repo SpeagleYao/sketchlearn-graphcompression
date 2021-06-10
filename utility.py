@@ -188,9 +188,167 @@ def drawScatterGraphs(file_name):
   plt.show()
 
 
+def drawMainBarGraph():
+  samples = ["10", "20", "30", "40", "50"]
+  orig_times = [0.256, 0.547, 0.857, 1.571, 1.75]
+  sketch_times_1 = [0.225413, 0.17922, 0.952791, 3.01084, 3.49483]
+  sketch_times_10 = [2.31669, 2.55956, 8.30721, 50.1642, 58.2097]
+  sketch_times_100 = [24.9, 130.6, 176.76, 827.165, 931.186]
+  size_of_prov_1 = [30, 21, 218, 657, 735]
+  size_of_prov_10 = [183, 212, 473, 1539, 1727]
+  size_of_prov_100 = [208, 552, 780, 1803, 2083]
+  
+  plt.figure()
+  x = range(5)
+  bar1 = plt.bar(left = [i - 0.3 for i in x], height = orig_times, width = 0.19,
+               alpha = 0.8, color = 'r',label = 'baseline maintenance time')
+  bar2 = plt.bar(left = [i-0.1 for i in x], height=sketch_times_1, width=0.19, alpha=0.5, color='b', label='1 round')
+  bar3 = plt.bar([i+0.1 for i in x], sketch_times_10, width = 0.19,
+               alpha = 0.7, color = 'b', label = '10 rounds') 
+  bar4 = plt.bar([i+0.3 for i in x], height=sketch_times_100, width=0.19,
+                alpha=0.9, color='b', label='100 rounds')
+  plt.xticks(x,samples)
+  plt.title('maintenance time')     
+  plt.xlabel('sample size')       
+  plt.ylabel('time')       
+  plt.yscale('log')
+  plt.legend()
+  plt.show()
+
+  plt.figure()
+  bar1 = plt.bar(left=[i-0.2 for i in x], height=size_of_prov_1, width=0.19, alpha=0.5, color='b',
+                label='1 rounds')
+  bar1 = plt.bar(left=[i for i in x], height=size_of_prov_10, width=0.19, alpha=0.7, color='b',
+                label='10 rounds')
+  bar2 = plt.bar(left=[i+0.2 for i in x], height=size_of_prov_100, width=0.19, alpha=0.9, color='b',
+                label='100 rounds')
+  plt.xticks(x,samples)
+  plt.title('provenance table size')     
+  plt.xlabel('sample size')       
+  plt.ylabel('size of prov table')       
+  plt.yscale('log')
+  plt.legend()
+  plt.show()
+
+
+def drawQueryBarGraph():
+  unique_terms = ["15", "17", "31", "39"]
+  orig_times = [1.723, 2.563, 42.41, 225]
+  sketch_times = [0.01, 0.01, 0.18, 0.49]
+  x = [0, 1, 5, 7]
+  bar1 = plt.bar(left = [i - 0.2 for i in x], height = orig_times, width = 0.4,
+               alpha = 0.8, color = 'r',label = 'baseline query time')
+  bar2 = plt.bar([i + 0.2 for i in x], sketch_times, width = 0.4,
+               alpha = 0.8, color = 'b', label = 'sketch query time') 
+
+  plt.xticks(x,unique_terms)
+  plt.title('provenance query time')     
+  plt.xlabel('number of unique terms')       
+  plt.ylabel('time')       
+  plt.yscale('log')
+  plt.legend()
+  plt.show()
+
+
+def drawPruneBarGraph():
+  unique_terms = ["15", "17", "31", "39"]
+  orig_times = [0.85, 2.19, 6.88, 114.7]
+  sketch_times = [1.06, 1.55, 3.9, 4.46]
+  x = [0, 1, 5, 7]
+  bar1 = plt.bar(left = [i - 0.2 for i in x], height = orig_times, width = 0.4,
+               alpha = 0.8, color = 'r',label = 'sufficient lieage')
+  bar2 = plt.bar([i + 0.2 for i in x], sketch_times, width = 0.4,
+               alpha = 0.8, color = 'b', label = 'sketch extraction (comp ratio=0)') 
+
+  plt.xticks(x,unique_terms)
+  plt.title('provenance prune time')     
+  plt.xlabel('number of unique terms')       
+  plt.ylabel('time')       
+  plt.yscale('log')
+  plt.legend()
+  plt.show()
+
+
+def drawTotalTermBarGraph():
+  unique_terms = ["15", "17", "31", "39"]
+  total_terms = [128, 139, 2978, 61958]
+  sketch_times = [1.06, 1.55, 3.9, 4.46]
+  x = [0, 1, 5, 7]
+  bar = plt.bar(left=x, height=total_terms, width=0.4, alpha=0.8, color='g')
+  plt.xticks(x,unique_terms)
+  plt.title('number of total terms after converting to DNF')     
+  plt.xlabel('number of unique terms')       
+  plt.ylabel('number of total terms')       
+  plt.yscale('log')
+  plt.legend()
+  plt.show()
+
+
+def drawPruneBarGraphWithCompRatio():
+  comp_ratios = ["suff", "0.0", "0.1", "0.2", "0.3", "0.4", "0.5"]
+  times = [18.5, 3.51946, 3.61, 3.59, 3.66, 3.58843, 3.73995]
+  x = range(7)
+  bar = plt.bar(left=x, height=times, width=0.4, alpha=0.8, color='g')
+  plt.xticks(x,comp_ratios)
+  plt.title('prune time with different comp ratio')     
+  plt.xlabel('comp ratio = (original_storage-sketch_size)/original_storage')       
+  plt.ylabel('time') 
+  plt.legend()
+  plt.show()
+
+
+def drawPruneTermsBarGraphWithCompRatio():
+  comp_ratios = ["suff", "0.0", "0.1", "0.2", "0.3", "0.4", "0.5"]
+  times = [0.956, 0, 0, 0, 0, 0.34, 0.951]
+  deltas = [0.004, 0, 0, 0, 0, 0.0418, 0.1]
+  x = range(7)
+  bar = plt.bar(left=x, height=times, width=0.4, alpha=0.8, color='g')
+  plt.xticks(x,comp_ratios)
+  plt.title('ratio of pruned terms with comp ratio in average')     
+  plt.xlabel('comp ratio')       
+  plt.ylabel('ratio of pruned terms') 
+  plt.legend()
+  plt.show()
+
+  bar = plt.bar(left=x, height=deltas, width=0.4, alpha=0.8, color='g')
+  plt.xticks(x,comp_ratios)
+  plt.title('delta with comp ratio in average')     
+  plt.xlabel('comp ratio')       
+  plt.ylabel('delta') 
+  plt.legend()
+  plt.show()
+
+
+def drawScatterGraphs():
+  pruned_terms_suff = [0.988, 0.95, 0.989807, 0.991113, 0.978829, 0.733926,  0.986932, 0.991113, 0.9885, 0.977261, 0.943544]
+  delta_suff = [0.0004, 0.0009, 0.0096, 0.0044, 0.0053, 0.0086,  0.0015, 0.0041, 0.002, 0.004, 0.0075]
+  pruned_terms_sketch = [0.99817, 0.99242, 0.995, 0.944851, 0.967852, 0.980397, 0.998693, 0.858599, 0.856247, 0.94, 0.925248]
+  delta_sketch = [0.0628, 0.098, 0.08, 0.0126, 0.6554, 0.1017, 0.0637, 0.0013, 0.0159, 0.006, 0.072]
+
+  print(np.mean(np.array(pruned_terms_suff)))
+  print(np.mean(np.array(delta_suff)))
+  print(np.mean(np.array(pruned_terms_sketch)))
+  print(np.mean(np.array(delta_sketch)))
+
+  fig, ax = plt.subplots()
+  ax.scatter(pruned_terms_suff, delta_suff, marker='o', color='red', label="suff", alpha=0.5)
+  ax.scatter(pruned_terms_sketch, delta_sketch, marker='^', color='blue', label="sketch", alpha=0.5)
+  ax.set_title("performance of suff and sketch to prune (comp ratio=0.6)")
+  ax.set_xlabel("ratio of pruned terms")
+  ax.set_ylabel("delta")
+  ax.legend()
+  plt.show()
+
 
 if __name__=='__main__':
   # drawHistGraph("./data/testp1/testp20.prov")
   # drawHistGraph("./data/trust_30/trustp_30_20.prov")
   # test8k3()
-  drawScatterGraphs("./data/sample10_new_10rounds/sample10_new_10rounds_mutualtrust1-2.log")
+  # drawScatterGraphs("./data/sample10_new_10rounds/sample10_new_10rounds_mutualtrust1-2.log")
+  drawMainBarGraph()
+  # drawQueryBarGraph()
+  # drawPruneBarGraph()
+  # drawTotalTermBarGraph()
+  # drawPruneBarGraphWithCompRatio()
+  # drawScatterGraphs()
+  # drawPruneTermsBarGraphWithCompRatio()

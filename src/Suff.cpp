@@ -53,7 +53,7 @@ void Suff::setOrigProb(vector< map<string, double> > lambda) {
     this->origProb = monteCarloSim(lambda);
     //this->origProb = shannonExpan(lambda);
     t = clock() - t;
-    cout << "MC time: "<<((float) t)/CLOCKS_PER_SEC << " seconds" << endl;
+    // cout << "MC time: "<<((float) t)/CLOCKS_PER_SEC << " seconds" << endl;
 }
 
 double Suff::getOrigProb() {
