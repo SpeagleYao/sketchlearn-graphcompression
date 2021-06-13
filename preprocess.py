@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+import argparse
 
 # def parse():
 #   parser = argparse.ArgumentParser()
@@ -8,6 +8,11 @@ import numpy as np
 #   parser.add_argument('-d', type=int, default=2)
 #   parser.add_argument('-w', type=int, default=5)
 #   return parser.parse_args()
+parser = argparse.ArgumentParser()
+parser.add_argument('-s', type=int, default=20)
+#   parser.add_argument('-d', type=int, default=2)
+#   parser.add_argument('-w', type=int, default=5)
+args = parser.parse_args()
 
 
 def sample(data, sampled, width, size, refer):
@@ -53,13 +58,13 @@ def preprocess(sampled):
 
 if __name__=='__main__':
   rawfile = './data/trust-new/bitcoinotc-prob.csv'
-  savefile = './data/sample_20_new.csv'
+  savefile = './data/new_samples/sample_'+str(args.s)+'_new.csv'
   rawdata = pd.read_csv(rawfile, sep=',')
   rawdata = rawdata[rawdata['node1']<30][rawdata['node2']<30]
   # print(rawdata.shape[0])
   # print(rawdata)
   sampled = pd.DataFrame(columns=rawdata.columns)
-  sampled = sample(rawdata, sampled, 5, 10, 1)
+  sampled = sample(rawdata, sampled, 5, args.s, 1)
   # sampled = preprocess(sampled)
   print(sampled)
   sampled.to_csv(savefile, encoding='gbk', index=False)
