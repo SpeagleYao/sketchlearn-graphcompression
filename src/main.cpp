@@ -153,14 +153,16 @@ map<string, double> setProbs(string sd) {
     {
         continue;
     }
+    fields[0] = fields[0].substr(0, fields[0].find("."));
+    fields[1] = fields[1].substr(0, fields[1].find("."));
     i++;
     string name;
     name.append("trust").append(fields[0]).append("-").append(fields[1]);
     double prob = stod(fields[2]);
     p[name] = prob;
-    //cout << name << " " << p[name] << endl;
+    // cout << name << " " << p[name] << endl;
   }
-  cout << "total number of element: " << i << endl;
+  // cout << "total number of element: " << i << endl;
 
   p["ra"] = 1.0;
   p["rb"] = 1.0;
@@ -240,14 +242,14 @@ string buildProvenance(string& toQuery,
 }
 
 
-unordered_map<string, int> feedAndExtract(int R, int C, int K, int shift, unordered_map<string, int>& freqs) {
+unordered_map<string, int> feedAndExtract(int R, int C, int K, int shift, bool exhaust, unordered_map<string, int>& freqs) {
   int totalfreq = 0;
   for (auto it : freqs) {
     totalfreq += it.second;
   }
   int thre = totalfreq/C;
   cout << "total frequence: " << totalfreq << ", threshold to be large flow: " << thre << endl;
-  MultiLevelSketch mls (R, C, K, shift);
+  MultiLevelSketch mls (R, C, K, shift, exhaust);
   for (auto it : freqs) {
     mls.feedFlowKey(it.first, it.second);
   }
@@ -317,7 +319,8 @@ int main(int argc, char* argv[]) {
     Rp = 3;
     Rr = 3;
     Cp = provFreqs.size()*stod(args["p"])/Rp;
-    Cr = ruleFreqs.size()*stod(args["p"])/Rr;
+    // Cr = ruleFreqs.size()*stod(args["p"])/Rr;
+    Cr = ruleFreqs.size()*0.6;
   }
   else {
     Rp = stoi(args["kp"]);
@@ -338,26 +341,49 @@ int main(int argc, char* argv[]) {
     prov = setProv(args["fp"]);
   }
   else {
+    clock_t t1 = clock();
     prov = buildProvenance(args["q"], visited, provFreqs, ruleFreqs, idToContent, contentToId);
+    clock_t t2 = clock();
+    cout << "provenance query time with sketch: " << (t2-t1)*1.0/CLOCKS_PER_SEC << endl;
   }
   // cout << prov << endl;
+  cout << endl; 
+
   clock_t t = clock();
   DNF original(prov, probs);
   Suff suff1(original.getLambda(), error);
   cout << "Sufficient lineage time: " << (clock()-t)*1.0/CLOCKS_PER_SEC << endl;
   vector<map<string, double>> OrigDNF = suff1.getOrigDNF();
+  unordered_set<string> uniqueTerms;
   int OrigTerms = 0;
   for (auto it : OrigDNF) {
     OrigTerms += it.size();
+    for (auto itt : it) {
+      if (uniqueTerms.find(itt.first)==uniqueTerms.end()) {
+        uniqueTerms.insert(itt.first);
+      }
+    }
   }
   cout << "number of terms: " << OrigTerms << endl;
+  cout << "number of unique terms: " << uniqueTerms.size() << endl;
+  cout << "numer of CNFs: " << OrigDNF.size() << endl;
   double OrigProb = suff1.getOrigProb();
   cout << "Original Probability = " << OrigProb << endl;
+  vector<map<string, double>> SuffDNF = suff1.getSuffDNF();
+  int SuffTerms = 0;
+  for (auto it : SuffDNF) {
+    SuffTerms += it.size();
+  }
+  cout << "number of Suff terms: " << SuffTerms << endl;
+  cout << "number of Suff CNFs: " << SuffDNF.size() << endl; 
+  double SuffProb = suff1.getSuffProb();
+  cout << "suff delta: " << abs(SuffProb-OrigProb) << endl;
+  cout << "ratio of pruned terms: " << abs(SuffTerms-OrigTerms)*1.0/OrigTerms << endl;
   cout << endl;
 
-  clock_t t1 = clock();
+  clock_t t3 = clock();
   // extract prov table first
-  unordered_map<string, int> provs = feedAndExtract(Rp, Cp, K, shift, provFreqs);
+  unordered_map<string, int> provs = feedAndExtract(Rp, Cp, K, shift, false, provFreqs);
   int match = 0;
   for (auto it : provFreqs) {
     if (provs.find(it.first)!=provs.end()) {
@@ -369,7 +395,7 @@ int main(int argc, char* argv[]) {
   }
   cout << "recall of provs: " << match*1.0/provFreqs.size() << endl;
 
-  unordered_map<string, int> rules = feedAndExtract(Rr, Cr, K, shift, ruleFreqs);
+  unordered_map<string, int> rules = feedAndExtract(Rr, Cr, K, shift, true, ruleFreqs);
   match = 0;
   for (auto it : ruleFreqs) {
     if (rules.find(it.first)!=rules.end()) {
@@ -380,8 +406,8 @@ int main(int argc, char* argv[]) {
     }
   }
   cout << "recall of rules: " << match*1.0/ruleFreqs.size() << endl;
-  clock_t t2 = clock();
-  cout << "sketch extraction time: " << (t2-t1)*1.0/CLOCKS_PER_SEC << endl;
+  clock_t t4 = clock();
+  cout << "sketch extraction time: " << (t4-t3)*1.0/CLOCKS_PER_SEC << endl;
   cout << endl;
 
   string prunedProv = buildProvenance(args["q"], visited, provs, rules, idToContent, contentToId);

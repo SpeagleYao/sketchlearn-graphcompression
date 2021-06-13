@@ -127,6 +127,22 @@ MultiLevelSketch::MultiLevelSketch(int r, int c, int k, int s) {
 };
 
 
+MultiLevelSketch::MultiLevelSketch(int r, int c, int k, int s, bool exhaust) {
+  assert(k>s);
+  this->R = r;
+  this->C = c;
+  this->K = k;
+  this->shift = s;
+  this->khfs = KHashFunctions(r, c);
+  // initSketch();
+  this->sketch = initialEmptySketch();
+  if (s!=0) {
+    this->sketchbackup = initialEmptySketch();
+  }
+  this->exhaust=exhaust;
+};
+
+
 void MultiLevelSketch::initSketch() {
   vector<vector<vector<int>>> sketchTable;
   for (int i=0; i<this->R; i++) {
@@ -843,6 +859,17 @@ bool MultiLevelSketch::terminate() {
     }
   }
   if (count==0) return true;
+  double thre1, thre2, thre3;
+  if (exhaust) {
+    thre1 = 1;
+    thre2 = 1;
+    thre3 = 1;
+  }
+  else {
+    thre1 = 0.78;
+    thre2 = 0.9544;
+    thre3 = 0.9973;
+  }
   // check the distribution
   int denominator = R*C*K;
   int lessOne = 0;
@@ -872,10 +899,7 @@ bool MultiLevelSketch::terminate() {
   double r1 = 1.0*lessOne/denominator;
   double r2 = 1.0*lessTwo/denominator;
   double r3 = 1.0*lessThree/denominator;
-  // if (r1>0.6826 && r2>0.9544 && r3>0.9973) {
-  //   return true;
-  // }
-  if (r1>1 && r2>1 && r3>1) {
+  if (r1>thre1 && r2>thre2 && r3>thre3) {
     return true;
   }
   return false;

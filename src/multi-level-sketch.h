@@ -48,6 +48,7 @@ public:
   MultiLevelSketch();
   MultiLevelSketch(int r, int c, int k);
   MultiLevelSketch(int r, int c, int k, int s);
+  MultiLevelSketch(int r, int c, int k, int s, bool exhaust);
 
   void initSketch();
   void resetSketch();
@@ -85,6 +86,7 @@ private:
   int C;
   int K;
   int shift;
+  bool exhaust=false;
 
   KHashFunctions khfs;
   vector<vector<vector<int>>> sketch;
